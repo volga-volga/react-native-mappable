@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D60CD0702C75DB4900E31E9A /* MappablePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD04E2C75DB4900E31E9A /* MappablePolyline.m */; };
+		D60CD0712C75DB4A00E31E9A /* ClusteredMappableView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD04F2C75DB4900E31E9A /* ClusteredMappableView.h */; };
+		D60CD0722C75DB4A00E31E9A /* MappableSuggests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0502C75DB4900E31E9A /* MappableSuggests.swift */; };
+		D60CD0732C75DB4A00E31E9A /* MappableCircleView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0512C75DB4900E31E9A /* MappableCircleView.h */; };
+		D60CD0742C75DB4A00E31E9A /* MappableCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0522C75DB4900E31E9A /* MappableCircleView.m */; };
+		D60CD0752C75DB4A00E31E9A /* MappableMarkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0532C75DB4900E31E9A /* MappableMarkerView.h */; };
+		D60CD0762C75DB4A00E31E9A /* MappableMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0542C75DB4900E31E9A /* MappableMarkerView.m */; };
+		D60CD0772C75DB4A00E31E9A /* MappablePolygonView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0552C75DB4900E31E9A /* MappablePolygonView.h */; };
+		D60CD0782C75DB4A00E31E9A /* MappablePolygonView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0562C75DB4900E31E9A /* MappablePolygonView.m */; };
+		D60CD0792C75DB4A00E31E9A /* MappablePolylineView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0572C75DB4900E31E9A /* MappablePolylineView.h */; };
+		D60CD07A2C75DB4A00E31E9A /* MappablePolylineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0582C75DB4900E31E9A /* MappablePolylineView.m */; };
+		D60CD07B2C75DB4A00E31E9A /* RNCMView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0592C75DB4900E31E9A /* RNCMView.h */; };
+		D60CD07C2C75DB4A00E31E9A /* RNCMView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD05A2C75DB4900E31E9A /* RNCMView.m */; };
+		D60CD07D2C75DB4A00E31E9A /* RNMView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD05B2C75DB4900E31E9A /* RNMView.h */; };
+		D60CD07E2C75DB4A00E31E9A /* RNMView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD05C2C75DB4900E31E9A /* RNMView.m */; };
+		D60CD07F2C75DB4A00E31E9A /* MappableCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD05E2C75DB4900E31E9A /* MappableCircle.m */; };
+		D60CD0802C75DB4A00E31E9A /* MappablePolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD05F2C75DB4900E31E9A /* MappablePolygon.h */; };
+		D60CD0812C75DB4A00E31E9A /* RCTConvert+Mappable.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0602C75DB4900E31E9A /* RCTConvert+Mappable.m */; };
+		D60CD0822C75DB4A00E31E9A /* RNMappable.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0622C75DB4900E31E9A /* RNMappable.h */; };
+		D60CD0832C75DB4A00E31E9A /* MappableSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0632C75DB4900E31E9A /* MappableSearch.swift */; };
+		D60CD0842C75DB4A00E31E9A /* ClusteredMappableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0642C75DB4900E31E9A /* ClusteredMappableView.m */; };
+		D60CD0852C75DB4A00E31E9A /* MappableView.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0652C75DB4900E31E9A /* MappableView.h */; };
+		D60CD0862C75DB4A00E31E9A /* MappableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0662C75DB4900E31E9A /* MappableView.m */; };
+		D60CD0872C75DB4A00E31E9A /* MappableMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0672C75DB4900E31E9A /* MappableMarker.h */; };
+		D60CD0882C75DB4A00E31E9A /* MappablePolyline.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD0682C75DB4900E31E9A /* MappablePolyline.h */; };
+		D60CD0892C75DB4A00E31E9A /* MappableSuggests.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD0692C75DB4900E31E9A /* MappableSuggests.m */; };
+		D60CD08A2C75DB4A00E31E9A /* MappablePolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD06A2C75DB4900E31E9A /* MappablePolygon.m */; };
+		D60CD08B2C75DB4A00E31E9A /* MappableSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD06B2C75DB4900E31E9A /* MappableSearch.m */; };
+		D60CD08C2C75DB4A00E31E9A /* MappableCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD06C2C75DB4900E31E9A /* MappableCircle.h */; };
+		D60CD08D2C75DB4A00E31E9A /* RNMappable.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD06D2C75DB4900E31E9A /* RNMappable.m */; };
+		D60CD08E2C75DB4A00E31E9A /* MappableMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = D60CD06E2C75DB4900E31E9A /* MappableMarker.m */; };
+		D60CD08F2C75DB4A00E31E9A /* RNMappable-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D60CD06F2C75DB4900E31E9A /* RNMappable-Bridging-Header.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		134814201AA4EA6300B7C361 /* libRNMappable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNMappable.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D60CD04E2C75DB4900E31E9A /* MappablePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappablePolyline.m; sourceTree = "<group>"; };
+		D60CD04F2C75DB4900E31E9A /* ClusteredMappableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusteredMappableView.h; sourceTree = "<group>"; };
+		D60CD0502C75DB4900E31E9A /* MappableSuggests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableSuggests.swift; sourceTree = "<group>"; };
+		D60CD0512C75DB4900E31E9A /* MappableCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappableCircleView.h; sourceTree = "<group>"; };
+		D60CD0522C75DB4900E31E9A /* MappableCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableCircleView.m; sourceTree = "<group>"; };
+		D60CD0532C75DB4900E31E9A /* MappableMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappableMarkerView.h; sourceTree = "<group>"; };
+		D60CD0542C75DB4900E31E9A /* MappableMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableMarkerView.m; sourceTree = "<group>"; };
+		D60CD0552C75DB4900E31E9A /* MappablePolygonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappablePolygonView.h; sourceTree = "<group>"; };
+		D60CD0562C75DB4900E31E9A /* MappablePolygonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappablePolygonView.m; sourceTree = "<group>"; };
+		D60CD0572C75DB4900E31E9A /* MappablePolylineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappablePolylineView.h; sourceTree = "<group>"; };
+		D60CD0582C75DB4900E31E9A /* MappablePolylineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappablePolylineView.m; sourceTree = "<group>"; };
+		D60CD0592C75DB4900E31E9A /* RNCMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCMView.h; sourceTree = "<group>"; };
+		D60CD05A2C75DB4900E31E9A /* RNCMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCMView.m; sourceTree = "<group>"; };
+		D60CD05B2C75DB4900E31E9A /* RNMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMView.h; sourceTree = "<group>"; };
+		D60CD05C2C75DB4900E31E9A /* RNMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMView.m; sourceTree = "<group>"; };
+		D60CD05E2C75DB4900E31E9A /* MappableCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableCircle.m; sourceTree = "<group>"; };
+		D60CD05F2C75DB4900E31E9A /* MappablePolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappablePolygon.h; sourceTree = "<group>"; };
+		D60CD0602C75DB4900E31E9A /* RCTConvert+Mappable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+Mappable.m"; sourceTree = "<group>"; };
+		D60CD0622C75DB4900E31E9A /* RNMappable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMappable.h; sourceTree = "<group>"; };
+		D60CD0632C75DB4900E31E9A /* MappableSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableSearch.swift; sourceTree = "<group>"; };
+		D60CD0642C75DB4900E31E9A /* ClusteredMappableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusteredMappableView.m; sourceTree = "<group>"; };
+		D60CD0652C75DB4900E31E9A /* MappableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappableView.h; sourceTree = "<group>"; };
+		D60CD0662C75DB4900E31E9A /* MappableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableView.m; sourceTree = "<group>"; };
+		D60CD0672C75DB4900E31E9A /* MappableMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappableMarker.h; sourceTree = "<group>"; };
+		D60CD0682C75DB4900E31E9A /* MappablePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappablePolyline.h; sourceTree = "<group>"; };
+		D60CD0692C75DB4900E31E9A /* MappableSuggests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableSuggests.m; sourceTree = "<group>"; };
+		D60CD06A2C75DB4900E31E9A /* MappablePolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappablePolygon.m; sourceTree = "<group>"; };
+		D60CD06B2C75DB4900E31E9A /* MappableSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableSearch.m; sourceTree = "<group>"; };
+		D60CD06C2C75DB4900E31E9A /* MappableCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappableCircle.h; sourceTree = "<group>"; };
+		D60CD06D2C75DB4900E31E9A /* RNMappable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMappable.m; sourceTree = "<group>"; };
+		D60CD06E2C75DB4900E31E9A /* MappableMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappableMarker.m; sourceTree = "<group>"; };
+		D60CD06F2C75DB4900E31E9A /* RNMappable-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNMappable-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58B511D81A9E6C8500147676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		134814211AA4EA7D00B7C361 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				134814201AA4EA6300B7C361 /* libRNMappable.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58B511D21A9E6C8500147676 = {
+			isa = PBXGroup;
+			children = (
+				D60CD04F2C75DB4900E31E9A /* ClusteredMappableView.h */,
+				D60CD0642C75DB4900E31E9A /* ClusteredMappableView.m */,
+				D60CD0612C75DB4900E31E9A /* Converter */,
+				D60CD06C2C75DB4900E31E9A /* MappableCircle.h */,
+				D60CD05E2C75DB4900E31E9A /* MappableCircle.m */,
+				D60CD0672C75DB4900E31E9A /* MappableMarker.h */,
+				D60CD06E2C75DB4900E31E9A /* MappableMarker.m */,
+				D60CD05F2C75DB4900E31E9A /* MappablePolygon.h */,
+				D60CD06A2C75DB4900E31E9A /* MappablePolygon.m */,
+				D60CD0682C75DB4900E31E9A /* MappablePolyline.h */,
+				D60CD04E2C75DB4900E31E9A /* MappablePolyline.m */,
+				D60CD06B2C75DB4900E31E9A /* MappableSearch.m */,
+				D60CD0632C75DB4900E31E9A /* MappableSearch.swift */,
+				D60CD0692C75DB4900E31E9A /* MappableSuggests.m */,
+				D60CD0502C75DB4900E31E9A /* MappableSuggests.swift */,
+				D60CD0652C75DB4900E31E9A /* MappableView.h */,
+				D60CD0662C75DB4900E31E9A /* MappableView.m */,
+				D60CD06F2C75DB4900E31E9A /* RNMappable-Bridging-Header.h */,
+				D60CD0622C75DB4900E31E9A /* RNMappable.h */,
+				D60CD06D2C75DB4900E31E9A /* RNMappable.m */,
+				D60CD05D2C75DB4900E31E9A /* View */,
+				134814211AA4EA7D00B7C361 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D60CD05D2C75DB4900E31E9A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D60CD0512C75DB4900E31E9A /* MappableCircleView.h */,
+				D60CD0522C75DB4900E31E9A /* MappableCircleView.m */,
+				D60CD0532C75DB4900E31E9A /* MappableMarkerView.h */,
+				D60CD0542C75DB4900E31E9A /* MappableMarkerView.m */,
+				D60CD0552C75DB4900E31E9A /* MappablePolygonView.h */,
+				D60CD0562C75DB4900E31E9A /* MappablePolygonView.m */,
+				D60CD0572C75DB4900E31E9A /* MappablePolylineView.h */,
+				D60CD0582C75DB4900E31E9A /* MappablePolylineView.m */,
+				D60CD0592C75DB4900E31E9A /* RNCMView.h */,
+				D60CD05A2C75DB4900E31E9A /* RNCMView.m */,
+				D60CD05B2C75DB4900E31E9A /* RNMView.h */,
+				D60CD05C2C75DB4900E31E9A /* RNMView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D60CD0612C75DB4900E31E9A /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				D60CD0602C75DB4900E31E9A /* RCTConvert+Mappable.m */,
+			);
+			path = Converter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D615FE4B222D65510044E3FA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D60CD0772C75DB4A00E31E9A /* MappablePolygonView.h in Headers */,
+				D60CD0852C75DB4A00E31E9A /* MappableView.h in Headers */,
+				D60CD0882C75DB4A00E31E9A /* MappablePolyline.h in Headers */,
+				D60CD0802C75DB4A00E31E9A /* MappablePolygon.h in Headers */,
+				D60CD0752C75DB4A00E31E9A /* MappableMarkerView.h in Headers */,
+				D60CD08C2C75DB4A00E31E9A /* MappableCircle.h in Headers */,
+				D60CD0712C75DB4A00E31E9A /* ClusteredMappableView.h in Headers */,
+				D60CD07B2C75DB4A00E31E9A /* RNCMView.h in Headers */,
+				D60CD0822C75DB4A00E31E9A /* RNMappable.h in Headers */,
+				D60CD0732C75DB4A00E31E9A /* MappableCircleView.h in Headers */,
+				D60CD0792C75DB4A00E31E9A /* MappablePolylineView.h in Headers */,
+				D60CD07D2C75DB4A00E31E9A /* RNMView.h in Headers */,
+				D60CD0872C75DB4A00E31E9A /* MappableMarker.h in Headers */,
+				D60CD08F2C75DB4A00E31E9A /* RNMappable-Bridging-Header.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		58B511DA1A9E6C8500147676 /* RNMappable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNMappable" */;
+			buildPhases = (
+				D615FE4B222D65510044E3FA /* Headers */,
+				58B511D71A9E6C8500147676 /* Sources */,
+				58B511D81A9E6C8500147676 /* Frameworks */,
+				D6D0D4EE222E8AC800838171 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNMappable;
+			productName = RCTDataManager;
+			productReference = 134814201AA4EA6300B7C361 /* libRNMappable.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58B511D31A9E6C8500147676 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					58B511DA1A9E6C8500147676 = {
+						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 1540;
+					};
+				};
+			};
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNMappable" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = 58B511D21A9E6C8500147676;
+			productRefGroup = 58B511D21A9E6C8500147676;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58B511DA1A9E6C8500147676 /* RNMappable */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D6D0D4EE222E8AC800838171 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58B511D71A9E6C8500147676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D60CD0892C75DB4A00E31E9A /* MappableSuggests.m in Sources */,
+				D60CD07A2C75DB4A00E31E9A /* MappablePolylineView.m in Sources */,
+				D60CD0812C75DB4A00E31E9A /* RCTConvert+Mappable.m in Sources */,
+				D60CD08B2C75DB4A00E31E9A /* MappableSearch.m in Sources */,
+				D60CD0842C75DB4A00E31E9A /* ClusteredMappableView.m in Sources */,
+				D60CD0742C75DB4A00E31E9A /* MappableCircleView.m in Sources */,
+				D60CD0832C75DB4A00E31E9A /* MappableSearch.swift in Sources */,
+				D60CD0722C75DB4A00E31E9A /* MappableSuggests.swift in Sources */,
+				D60CD0762C75DB4A00E31E9A /* MappableMarkerView.m in Sources */,
+				D60CD07F2C75DB4A00E31E9A /* MappableCircle.m in Sources */,
+				D60CD07E2C75DB4A00E31E9A /* RNMView.m in Sources */,
+				D60CD07C2C75DB4A00E31E9A /* RNCMView.m in Sources */,
+				D60CD0782C75DB4A00E31E9A /* MappablePolygonView.m in Sources */,
+				D60CD0862C75DB4A00E31E9A /* MappableView.m in Sources */,
+				D60CD08D2C75DB4A00E31E9A /* RNMappable.m in Sources */,
+				D60CD08E2C75DB4A00E31E9A /* MappableMarker.m in Sources */,
+				D60CD0702C75DB4900E31E9A /* MappablePolyline.m in Sources */,
+				D60CD08A2C75DB4A00E31E9A /* MappablePolygon.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		58B511ED1A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		58B511EE1A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58B511F01A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)/**";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNMappable;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNMappable-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		58B511F11A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)/**";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNMappable;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNMappable-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNMappable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511ED1A9E6C8500147676 /* Debug */,
+				58B511EE1A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNMappable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511F01A9E6C8500147676 /* Debug */,
+				58B511F11A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
+}

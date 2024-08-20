@@ -1,0 +1,36 @@
+{
+  "name": "react-native-mappable",
+  "version": "4.7.2",
+  "description": "Mappable Kit for react-native",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "rm -rf build && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/volga-volga/react-native-mappable",
+  "keywords": [
+    "react-native",
+    "mapkit",
+    "mappable",
+    "polygon",
+    "polyline",
+    "marker",
+    "map",
+    "maps",
+    "react-native-maps",
+    "mappablemap",
+    "mappablemaps"
+  ],
+  "author": "Nikita Sirotkin",
+  "license": "",
+  "devDependencies": {
+    "@types/react": "*",
+    "@types/react-native": "*",
+    "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
+}
