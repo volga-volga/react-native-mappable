@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
     # s.requires_arc = true
 
     s.dependency "React"
-    s.dependency "MappableMobile", "4.7.2-full"
+    s.dependency "MappableMobile", "1.1.0-full"
 end
