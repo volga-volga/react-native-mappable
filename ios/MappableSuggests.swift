@@ -70,7 +70,7 @@ class MappableSuggests: NSObject {
 
                     var suggestsToPass = [[String: Any]]()
 
-                    suggest?.items.forEach { suggestItem in
+                    suggest?.forEach { suggestItem in
                         var suggestToPass = [String: Any]()
                         suggestToPass["title"] = suggestItem.title.text
                         suggestToPass["subtitle"] = suggestItem.subtitle?.text
