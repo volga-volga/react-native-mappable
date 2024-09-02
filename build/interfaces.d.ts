@@ -28,9 +28,9 @@ export interface InitialRegion {
     azimuth?: number;
     tilt?: number;
 }
-export declare type MasstransitVehicles = 'bus' | 'trolleybus' | 'tramway' | 'minibus' | 'suburban' | 'underground' | 'ferry' | 'cable' | 'funicular';
-export declare type Vehicles = MasstransitVehicles | 'walk' | 'car';
-export declare type MapType = 'none' | 'raster' | 'vector';
+export type MasstransitVehicles = 'bus' | 'trolleybus' | 'tramway' | 'minibus' | 'suburban' | 'underground' | 'ferry' | 'cable' | 'funicular';
+export type Vehicles = MasstransitVehicles | 'walk' | 'car';
+export type MapType = 'none' | 'raster' | 'vector';
 export interface DrivingInfo {
     time: string;
     timeWithTraffic: string;
@@ -69,7 +69,7 @@ export interface CameraPosition {
     reason: 'GESTURES' | 'APPLICATION';
     finished: boolean;
 }
-export declare type VisibleRegion = {
+export type VisibleRegion = {
     bottomLeft: Point;
     bottomRight: Point;
     topLeft: Point;
@@ -79,11 +79,11 @@ export declare enum Animation {
     SMOOTH = 0,
     LINEAR = 1
 }
-export declare type MappableLogoPosition = {
+export type MappableLogoPosition = {
     horizontal?: 'left' | 'center' | 'right';
     vertical?: 'top' | 'bottom';
 };
-export declare type MappableLogoPadding = {
+export type MappableLogoPadding = {
     horizontal?: number;
     vertical?: number;
 };

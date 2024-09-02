@@ -1,14 +1,14 @@
 import { BoundingBox, Point } from './interfaces';
-export declare type MappableSuggest = {
+export type MappableSuggest = {
     title: string;
     subtitle?: string;
     uri?: string;
 };
-export declare type MappableCoords = {
+export type MappableCoords = {
     lon: number;
     lat: number;
 };
-export declare type MappableSuggestWithCoords = MappableSuggest & Partial<MappableCoords>;
+export type MappableSuggestWithCoords = MappableSuggest & Partial<MappableCoords>;
 export declare enum SuggestTypes {
     MMKSuggestTypeUnspecified = 0,
     /**
@@ -24,16 +24,16 @@ export declare enum SuggestTypes {
      */
     MMKSuggestTypeTransit = 4
 }
-export declare type SuggestOptions = {
+export type SuggestOptions = {
     userPosition?: Point;
     boundingBox?: BoundingBox;
     suggestWords?: boolean;
     suggestTypes?: SuggestTypes[];
 };
-declare type SuggestFetcher = (query: string, options?: SuggestOptions) => Promise<Array<MappableSuggest>>;
-declare type SuggestWithCoordsFetcher = (query: string, options?: SuggestOptions) => Promise<Array<MappableSuggestWithCoords>>;
-declare type SuggestResetter = () => Promise<void>;
-declare type LatLonGetter = (suggest: MappableSuggest) => MappableCoords | undefined;
+type SuggestFetcher = (query: string, options?: SuggestOptions) => Promise<Array<MappableSuggest>>;
+type SuggestWithCoordsFetcher = (query: string, options?: SuggestOptions) => Promise<Array<MappableSuggestWithCoords>>;
+type SuggestResetter = () => Promise<void>;
+type LatLonGetter = (suggest: MappableSuggest) => MappableCoords | undefined;
 declare const Suggest: {
     suggest: SuggestFetcher;
     suggestWithCoords: SuggestWithCoordsFetcher;

@@ -8,16 +8,16 @@ export interface Address {
         name: string;
     }[];
 }
-export declare type MappableSearch = {
+export type MappableSearch = {
     title: string;
     subtitle?: string;
     uri?: string;
 };
-export declare type MappableCoords = {
+export type MappableCoords = {
     lon: number;
     lat: number;
 };
-export declare type MappableSearchWithCoords = MappableSearch & Partial<MappableCoords>;
+export type MappableSearchWithCoords = MappableSearch & Partial<MappableCoords>;
 export declare enum SearchTypes {
     MMKSearchTypeUnspecified = 0,
     /**
@@ -40,7 +40,7 @@ export declare enum SearchTypesSnippets {
      */
     MMKSearchTypeBiz = 1
 }
-export declare type SearchOptions = {
+export type SearchOptions = {
     disableSpellingCorrection?: boolean;
     geometry?: boolean;
     snippets?: SearchTypesSnippets;
@@ -68,11 +68,12 @@ export interface PolygonParams {
     type: GeoFigureType.POLYGON;
     value: PolygonParams;
 }
-declare type SearchFetcher = (query: string, options?: SearchOptions) => Promise<Array<MappableSearch>>;
-declare type SearchPointFetcher = (point: Point, options?: SearchOptions) => Promise<Address>;
+type FigureParams = PointParams | BoundingBoxParams | PolylineParams | PolygonParams;
+type SearchFetcher = (query: string, options?: SearchOptions) => Promise<Array<MappableSearch>>;
+type SearchPointFetcher = (point: Point, options?: SearchOptions) => Promise<Address>;
 declare const Search: {
-    searchText: (query: string, figure?: PointParams | BoundingBoxParams | PolylineParams | PolygonParams | undefined, options?: SearchOptions | undefined) => any;
-    searchPoint: (point: Point, zoom?: number | undefined, options?: SearchOptions | undefined) => Promise<Address[]>;
+    searchText: (query: string, figure?: FigureParams, options?: SearchOptions) => any;
+    searchPoint: (point: Point, zoom?: number, options?: SearchOptions) => Promise<Address[]>;
     geocodePoint: SearchPointFetcher;
     geocodeAddress: SearchFetcher;
     resolveURI: SearchFetcher;

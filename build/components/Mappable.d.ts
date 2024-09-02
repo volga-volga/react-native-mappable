@@ -33,7 +33,7 @@ export declare class MappableMap extends React.Component<MappableMapProps> {
         clusterColor: string;
         maxFps: number;
     };
-    map: React.RefObject<any>;
+    map: React.RefObject<MappableMapNativeComponent>;
     static ALL_MASSTRANSIT_VEHICLES: Vehicles[];
     static init(apiKey: string): Promise<void>;
     static setLocale(locale: string): Promise<void>;

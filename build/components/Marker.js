@@ -3,10 +3,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -32,7 +34,7 @@ var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 // @ts-ignore
 var resolveAssetSource_1 = __importDefault(require("react-native/Libraries/Image/resolveAssetSource"));
-var NativeMarkerComponent = react_native_1.requireNativeComponent('MappableMarker');
+var NativeMarkerComponent = (0, react_native_1.requireNativeComponent)('MappableMarker');
 var Marker = /** @class */ (function (_super) {
     __extends(Marker, _super);
     function Marker() {
@@ -66,16 +68,16 @@ var Marker = /** @class */ (function (_super) {
         };
     };
     Marker.prototype.resolveImageUri = function (img) {
-        return img ? resolveAssetSource_1.default(img).uri : '';
+        return img ? (0, resolveAssetSource_1.default)(img).uri : '';
     };
     Marker.prototype.getProps = function () {
         return __assign(__assign({}, this.props), { source: this.resolveImageUri(this.props.source) });
     };
     Marker.prototype.animatedMoveTo = function (coords, duration) {
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('animatedMoveTo'), [coords, duration]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('animatedMoveTo'), [coords, duration]);
     };
     Marker.prototype.animatedRotateTo = function (angle, duration) {
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('animatedRotateTo'), [angle, duration]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('animatedRotateTo'), [angle, duration]);
     };
     Marker.prototype.render = function () {
         return (react_1.default.createElement(NativeMarkerComponent, __assign({}, this.getProps(), { key: String(this.state.recreateKey), pointerEvents: 'none' })));

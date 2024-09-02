@@ -3,10 +3,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -48,7 +50,7 @@ var interfaces_1 = require("../interfaces");
 var utils_1 = require("../utils");
 var Mappable_1 = require("./Mappable");
 var NativeMappableModule = react_native_1.NativeModules.mappable;
-var MappableMapNativeComponent = react_native_1.requireNativeComponent('ClusteredMappableView');
+var MappableMapNativeComponent = (0, react_native_1.requireNativeComponent)('ClusteredMappableView');
 var ClusteredMappable = /** @class */ (function (_super) {
     __extends(ClusteredMappable, _super);
     function ClusteredMappable() {
@@ -88,13 +90,13 @@ var ClusteredMappable = /** @class */ (function (_super) {
         this._findRoutes(points, ['car'], callback);
     };
     ClusteredMappable.prototype.fitAllMarkers = function () {
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('fitAllMarkers'), []);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('fitAllMarkers'), []);
     };
     ClusteredMappable.prototype.setTrafficVisible = function (isVisible) {
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('setTrafficVisible'), [isVisible]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('setTrafficVisible'), [isVisible]);
     };
     ClusteredMappable.prototype.fitMarkers = function (points) {
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('fitMarkers'), [points]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('fitMarkers'), [points]);
     };
     ClusteredMappable.prototype.setCenter = function (center, zoom, azimuth, tilt, duration, animation) {
         if (zoom === void 0) { zoom = center.zoom || 10; }
@@ -102,33 +104,33 @@ var ClusteredMappable = /** @class */ (function (_super) {
         if (tilt === void 0) { tilt = 0; }
         if (duration === void 0) { duration = 0; }
         if (animation === void 0) { animation = interfaces_1.Animation.SMOOTH; }
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('setCenter'), [center, zoom, azimuth, tilt, duration, animation]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('setCenter'), [center, zoom, azimuth, tilt, duration, animation]);
     };
     ClusteredMappable.prototype.setZoom = function (zoom, duration, animation) {
         if (duration === void 0) { duration = 0; }
         if (animation === void 0) { animation = interfaces_1.Animation.SMOOTH; }
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('setZoom'), [zoom, duration, animation]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('setZoom'), [zoom, duration, animation]);
     };
     ClusteredMappable.prototype.getCameraPosition = function (callback) {
         var cbId = CallbacksManager_1.default.addCallback(callback);
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('getCameraPosition'), [cbId]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('getCameraPosition'), [cbId]);
     };
     ClusteredMappable.prototype.getVisibleRegion = function (callback) {
         var cbId = CallbacksManager_1.default.addCallback(callback);
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('getVisibleRegion'), [cbId]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('getVisibleRegion'), [cbId]);
     };
     ClusteredMappable.prototype.getScreenPoints = function (points, callback) {
         var cbId = CallbacksManager_1.default.addCallback(callback);
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('getScreenPoints'), [points, cbId]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('getScreenPoints'), [points, cbId]);
     };
     ClusteredMappable.prototype.getWorldPoints = function (points, callback) {
         var cbId = CallbacksManager_1.default.addCallback(callback);
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('getWorldPoints'), [points, cbId]);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('getWorldPoints'), [points, cbId]);
     };
     ClusteredMappable.prototype._findRoutes = function (points, vehicles, callback) {
         var cbId = CallbacksManager_1.default.addCallback(callback);
         var args = react_native_1.Platform.OS === 'ios' ? [{ points: points, vehicles: vehicles, id: cbId }] : [points, vehicles, cbId];
-        react_native_1.UIManager.dispatchViewManagerCommand(react_native_1.findNodeHandle(this), this.getCommand('findRoutes'), args);
+        react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('findRoutes'), args);
     };
     ClusteredMappable.prototype.getCommand = function (cmd) {
         return react_native_1.Platform.OS === 'ios' ? react_native_1.UIManager.getViewManagerConfig('ClusteredMappableView').Commands[cmd] : cmd;
@@ -154,13 +156,13 @@ var ClusteredMappable = /** @class */ (function (_super) {
         CallbacksManager_1.default.call(id, worldPoints);
     };
     ClusteredMappable.prototype.resolveImageUri = function (img) {
-        return img ? resolveAssetSource_1.default(img).uri : '';
+        return img ? (0, resolveAssetSource_1.default)(img).uri : '';
     };
     ClusteredMappable.prototype.getProps = function () {
         var props = __assign(__assign({}, this.props), { clusteredMarkers: this.props.clusteredMarkers.map(function (mark) { return mark.point; }), children: this.props.clusteredMarkers.map(this.props.renderMarker), onRouteFound: this.processRoute, onCameraPositionReceived: this.processCameraPosition, onVisibleRegionReceived: this.processVisibleRegion, onWorldToScreenPointsReceived: this.processWorldToScreenPointsReceived, onScreenToWorldPointsReceived: this.processScreenToWorldPointsReceived, userLocationIcon: this.props.userLocationIcon ? this.resolveImageUri(this.props.userLocationIcon) : undefined });
-        utils_1.processColorProps(props, 'clusterColor');
-        utils_1.processColorProps(props, 'userLocationAccuracyFillColor');
-        utils_1.processColorProps(props, 'userLocationAccuracyStrokeColor');
+        (0, utils_1.processColorProps)(props, 'clusterColor');
+        (0, utils_1.processColorProps)(props, 'userLocationAccuracyFillColor');
+        (0, utils_1.processColorProps)(props, 'userLocationAccuracyStrokeColor');
         return props;
     };
     ClusteredMappable.prototype.render = function () {

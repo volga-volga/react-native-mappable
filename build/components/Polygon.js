@@ -3,10 +3,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31,7 +33,7 @@ exports.Polygon = void 0;
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var utils_1 = require("../utils");
-var NativePolygonComponent = react_native_1.requireNativeComponent('MappablePolygon');
+var NativePolygonComponent = (0, react_native_1.requireNativeComponent)('MappablePolygon');
 var Polygon = /** @class */ (function (_super) {
     __extends(Polygon, _super);
     function Polygon() {
@@ -39,8 +41,8 @@ var Polygon = /** @class */ (function (_super) {
     }
     Polygon.prototype.render = function () {
         var props = __assign({}, this.props);
-        utils_1.processColorProps(props, 'fillColor');
-        utils_1.processColorProps(props, 'strokeColor');
+        (0, utils_1.processColorProps)(props, 'fillColor');
+        (0, utils_1.processColorProps)(props, 'strokeColor');
         return react_1.default.createElement(NativePolygonComponent, __assign({}, props));
     };
     Polygon.defaultProps = {

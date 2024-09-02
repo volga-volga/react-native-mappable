@@ -6,7 +6,7 @@ function processColorProps(props, name) {
     if (props[name]) {
         /* eslint-disable no-param-reassign */
         // @ts-ignore
-        props[name] = react_native_1.processColor(props[name]);
+        props[name] = (0, react_native_1.processColor)(props[name]);
         /* eslint-enable no-param-reassign */
     }
 }
@@ -17,7 +17,7 @@ function guid() {
             .toString(16)
             .substring(1);
     }
-    return "" + s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4();
+    return "".concat(s4()).concat(s4(), "-").concat(s4(), "-").concat(s4(), "-").concat(s4(), "-").concat(s4()).concat(s4()).concat(s4());
 }
 exports.guid = guid;
 //# sourceMappingURL=index.js.map
