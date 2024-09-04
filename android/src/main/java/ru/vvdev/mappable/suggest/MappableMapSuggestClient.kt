@@ -56,6 +56,7 @@ class MappableMapSuggestClient(context: Context?) : MapSuggestClient {
                             suggest.subtitle = rawSuggest.subtitle!!.text
                         }
                         suggest.uri = rawSuggest.uri
+                        suggest.center = rawSuggest.center
                         result.add(suggest)
                     }
                     onSuccess!!.invoke(result)

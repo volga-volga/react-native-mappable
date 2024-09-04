@@ -22,6 +22,10 @@ class MappableSuggestRNArgsHelper {
         result.putString("title", data.title)
         result.putString("subtitle", data.subtitle)
         result.putString("uri", data.uri)
+        val center = Arguments.createMap()
+        data.center?.latitude?.let { center.putDouble("lat", it) }
+        data.center?.latitude?.let { center.putDouble("lon", it) }
+        result.putMap("center", center)
 
         return result
     }
