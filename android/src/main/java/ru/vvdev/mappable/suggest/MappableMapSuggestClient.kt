@@ -22,13 +22,6 @@ class MappableMapSuggestClient(context: Context?) : MapSuggestClient {
     private val suggestOptions = SuggestOptions()
     private var suggestSession: SuggestSession? = null
 
-    /**
-     * Для Яндекса нужно указать географическую область поиска. В дефолтном варианте мы не знаем какие
-     * границы для каждого конкретного города, поэтому поиск осуществляется по всему миру.
-     * Для `BoundingBox` нужно указать ширину и долготу для юго-западной точки и северо-восточной
-     * в градусах. Получается, что координаты самой юго-западной точки, это
-     * ширина = -90, долгота = -180, а самой северо-восточной - ширина = 90, долгота = 180
-     */
     private val defaultGeometry = BoundingBox(Point(-90.0, -180.0), Point(90.0, 180.0))
 
     init {

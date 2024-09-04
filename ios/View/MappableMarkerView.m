@@ -59,10 +59,10 @@
                 if (![source isEqual:lastSource]) {
                     [mapObject setIconWithImage:[self resolveUIImage:source]];
                     lastSource = source;
+                    [mapObject setIconStyleWithStyle:iconStyle];
                 }
             }
         }
-        [mapObject setIconStyleWithStyle:iconStyle];
     }
 }
 
@@ -235,8 +235,9 @@
 - (void)rotateAnimationLoop:(NSInteger)frame withTotalFrames:(NSInteger)totalFrames withDelta:(double)delta {
     @try  {
         MMKPlacemarkMapObject *placemark = [self getMapObject];
-        [placemark setDirection:placemark.direction+(delta / totalFrames)];
-
+        float dir = placemark.direction;
+        float nextDir = placemark.direction+(delta / totalFrames);
+        placemark.direction = nextDir;
         if (frame < totalFrames) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC / MAP_FRAMES_PER_SECOND), dispatch_get_main_queue(), ^{
                 [self rotateAnimationLoop: frame+1 withTotalFrames:totalFrames withDelta:delta];

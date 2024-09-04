@@ -11,7 +11,7 @@ class MappableSuggests: NSObject {
         let southWestPoint = MMKPoint(latitude: -90.0, longitude: -180.0)
         let northEastPoint = MMKPoint(latitude: 90.0, longitude: 180.0)
         self.defaultBoundingBox = MMKBoundingBox(southWest: southWestPoint, northEast: northEastPoint)
-        self.suggestOptions = MMKSuggestOptions(suggestTypes: [], userPosition: nil, suggestWords: false)
+        self.suggestOptions = MMKSuggestOptions(suggestTypes: [], userPosition: nil, suggestWords: false, strictBounds: false)
         super.init()
     }
 
@@ -46,7 +46,7 @@ class MappableSuggests: NSObject {
 
         if searchManager == nil {
             runOnMainQueueWithoutDeadlocking {
-                self.searchManager = MMKSearch.sharedInstance().createSearchManager(with: .online)
+                self.searchManager = MMKSearchFactory.instance().createSearchManager(with: .online)
             }
         }
 
@@ -70,11 +70,12 @@ class MappableSuggests: NSObject {
 
                     var suggestsToPass = [[String: Any]]()
 
-                    suggest?.forEach { suggestItem in
+                    suggest?.items.forEach { suggestItem in
                         var suggestToPass = [String: Any]()
                         suggestToPass["title"] = suggestItem.title.text
                         suggestToPass["subtitle"] = suggestItem.subtitle?.text
                         suggestToPass["uri"] = suggestItem.uri
+                        suggestToPass["center"] = ["lat": suggestItem.center?.latitude, "lon": suggestItem.center?.longitude];
                         suggestsToPass.append(suggestToPass)
                     }
 

@@ -4,10 +4,6 @@ import com.facebook.react.bridge.ReadableMap
 import ru.vvdev.mappable.utils.Callback
 
 interface MapSuggestClient {
-    /**
-     * Получить саджесты по тексту `text`.
-     * Вернуть результат в метод `onSuccess` в случае успеха, в случае неудачи в `onError`
-     */
     fun suggest(
         text: String?,
         onSuccess: Callback<List<MapSuggestItem?>?>?,
@@ -20,8 +16,5 @@ interface MapSuggestClient {
         onSuccess: Callback<List<MapSuggestItem?>?>?,
         onError: Callback<Throwable?>?
     )
-    /**
-     * Остановить сессию поиска саджестов
-     */
     fun resetSuggest()
 }
