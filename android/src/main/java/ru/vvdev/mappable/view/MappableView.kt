@@ -93,7 +93,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
     private var userLocationView: UserLocationView? = null
 
     init {
-        drivingRouter = DirectionsFactory.getInstance().createDrivingRouter(DrivingRouterType.ONLINE)
+        drivingRouter = DirectionsFactory.getInstance().createDrivingRouter(DrivingRouterType.COMBINED)
         mapWindow.map.addCameraListener(this)
         mapWindow.map.addInputListener(this)
         mapWindow.map.setMapLoadedListener(this)

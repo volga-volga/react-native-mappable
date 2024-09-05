@@ -55,11 +55,9 @@ export interface RouteInfo<T extends (DrivingInfo | MasstransitInfo)> {
     }[];
 }
 export interface RoutesFoundEvent<T extends (DrivingInfo | MasstransitInfo)> {
-    nativeEvent: {
-        status: 'success' | 'error';
-        id: string;
-        routes: RouteInfo<T>[];
-    };
+    status: 'success' | 'error';
+    id: string;
+    routes: RouteInfo<T>[];
 }
 export interface CameraPosition {
     zoom: number;

@@ -43,7 +43,7 @@ class MappableSearch: NSObject {
     func initSearchManager() -> Void {
         if searchManager == nil {
             runOnMainQueueWithoutDeadlocking {
-                self.searchManager = MMKSearch.sharedInstance().createSearchManager(with: .online)
+                self.searchManager = MMKSearchFactory.instance().createSearchManager(with: .online)
             }
         }
     }

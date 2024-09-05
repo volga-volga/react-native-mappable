@@ -12,6 +12,7 @@ import world.mappable.mapkit.map.MapObject
 import world.mappable.mapkit.map.MapObjectTapListener
 import world.mappable.mapkit.map.PolylineMapObject
 import ru.vvdev.mappable.models.ReactMapObject
+import world.mappable.mapkit.geometry.Geometry
 
 class MappablePolyline(context: Context?) : ViewGroup(context), MapObjectTapListener, ReactMapObject {
     @JvmField
@@ -83,17 +84,15 @@ class MappablePolyline(context: Context?) : ViewGroup(context), MapObjectTapList
 
     private fun updatePolyline() {
         if (rnMapObject != null) {
-            (rnMapObject as PolylineMapObject).apply {
-                geometry
-                strokeWidth
-                setStrokeColor(strokeColor)
-                zIndex
-                dashLength
-                gapLength
-                dashOffset
-                outlineColor
-                outlineWidth
-            }
+            (rnMapObject as PolylineMapObject).geometry=polyline
+            (rnMapObject as PolylineMapObject).strokeWidth=strokeWidth
+            (rnMapObject as PolylineMapObject).setStrokeColor(strokeColor)
+            (rnMapObject as PolylineMapObject).zIndex=zIndex.toFloat()
+            (rnMapObject as PolylineMapObject).dashLength=dashLength.toFloat()
+            (rnMapObject as PolylineMapObject).gapLength=gapLength.toFloat()
+            (rnMapObject as PolylineMapObject).dashOffset=dashOffset
+            (rnMapObject as PolylineMapObject).outlineColor=outlineColor
+            (rnMapObject as PolylineMapObject).outlineWidth=outlineWidth.toFloat()
         }
     }
 

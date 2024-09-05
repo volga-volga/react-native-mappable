@@ -58,9 +58,9 @@
 #endif
 
     _reactSubviews = [[NSMutableArray alloc] init];
-    masstransitRouter = [[MMKTransport sharedInstance] createMasstransitRouter];
-//    drivingRouter = [[MMK sharedInstance] createDrivingRouter];
-    pedestrianRouter = [[MMKTransport sharedInstance] createPedestrianRouter];
+    masstransitRouter = [[MMKTransportFactory instance] createMasstransitRouter];
+    drivingRouter = [[MMKDirectionsFactory instance] createDrivingRouterWithType:MMKDrivingRouterTypeCombined];
+    pedestrianRouter = [[MMKTransportFactory instance] createPedestrianRouter];
     transitOptions = [MMKTransitOptions transitOptionsWithAvoid:MMKFilterVehicleTypesNone timeOptions:[[MMKTimeOptions alloc] init]];    acceptVehicleTypes = [[NSMutableArray<NSString *> alloc] init];
     routes = [[NSMutableArray alloc] init];
     currentRouteInfo = [[NSMutableArray alloc] init];
@@ -118,16 +118,16 @@
 
     [routeMetadata setObject:wTransports forKey:@"transports"];
     NSMutableArray* points = [[NSMutableArray alloc] init];
-//    MMKPolyline* subpolyline = [MMKSubpolylineHelper subpolylineWithPolyline:route.geometry subpolyline:section.geometry];
+    MMKPolyline *subpolyline = [MMKSubpolylineHelper subpolylineWithPolyline:route.geometry subpolyline:section.geometry];
 
-//
-//    for (int i = 0; i < [subpolyline.points count]; ++i) {
-//        MMKPoint* point = [subpolyline.points objectAtIndex:i];
-//        NSMutableDictionary* jsonPoint = [[NSMutableDictionary alloc] init];
-//        [jsonPoint setValue:[NSNumber numberWithDouble:point.latitude] forKey:@"lat"];
-//        [jsonPoint setValue:[NSNumber numberWithDouble:point.longitude] forKey:@"lon"];
-//        [points addObject:jsonPoint];
-//    }
+
+    for (int i = 0; i < [subpolyline.points count]; ++i) {
+        MMKPoint* point = [subpolyline.points objectAtIndex:i];
+        NSMutableDictionary* jsonPoint = [[NSMutableDictionary alloc] init];
+        [jsonPoint setValue:[NSNumber numberWithDouble:point.latitude] forKey:@"lat"];
+        [jsonPoint setValue:[NSNumber numberWithDouble:point.longitude] forKey:@"lon"];
+        [points addObject:jsonPoint];
+    }
     [routeMetadata setValue:points forKey:@"points"];
 
     return routeMetadata;
@@ -204,15 +204,15 @@
 
     [routeMetadata setObject:wTransports forKey:@"transports"];
     NSMutableArray *points = [[NSMutableArray alloc] init];
-//    MMKPolyline *subpolyline = MMKMakeSubpolyline(route.geometry, section.geometry);
-//
-//    for (int i = 0; i < [subpolyline.points count]; ++i) {
-//        MMKPoint *point = [subpolyline.points objectAtIndex:i];
-//        NSMutableDictionary *jsonPoint = [[NSMutableDictionary alloc] init];
-//        [jsonPoint setValue:[NSNumber numberWithDouble:point.latitude] forKey:@"lat"];
-//        [jsonPoint setValue:[NSNumber numberWithDouble:point.longitude] forKey:@"lon"];
-//        [points addObject:jsonPoint];
-//    }
+    MMKPolyline *subpolyline = [MMKSubpolylineHelper subpolylineWithPolyline:route.geometry subpolyline:section.geometry];
+
+    for (int i = 0; i < [subpolyline.points count]; ++i) {
+        MMKPoint *point = [subpolyline.points objectAtIndex:i];
+        NSMutableDictionary *jsonPoint = [[NSMutableDictionary alloc] init];
+        [jsonPoint setValue:[NSNumber numberWithDouble:point.latitude] forKey:@"lat"];
+        [jsonPoint setValue:[NSNumber numberWithDouble:point.longitude] forKey:@"lon"];
+        [points addObject:jsonPoint];
+    }
 
     [routeMetadata setValue:points forKey:@"points"];
 
@@ -223,40 +223,40 @@
     __weak RNMView *weakSelf = self;
 
     if ([vehicles count] == 1 && [[vehicles objectAtIndex:0] isEqualToString:@"car"]) {
-//        MMKDrivingDrivingOptions *drivingOptions = [[MMKDrivingDrivingOptions alloc] init];
-//        MMKDrivingVehicleOptions *vehicleOptions = [[MMKDrivingVehicleOptions alloc] init];
-//
-//        drivingSession = [drivingRouter requestRoutesWithPoints:_points drivingOptions:drivingOptions
-//                                                 vehicleOptions:vehicleOptions routeHandler:^(NSArray<MMKDrivingRoute *> *routes, NSError *error) {
-//            RNMView *strongSelf = weakSelf;
-//
-//            if (error != nil) {
-//                [strongSelf onReceiveNativeEvent: @{@"id": _id, @"status": @"error"}];
-//                return;
-//            }
-//
-//            NSMutableDictionary* response = [[NSMutableDictionary alloc] init];
-//            [response setValue:_id forKey:@"id"];
-//            [response setValue:@"status" forKey:@"success"];
-//            NSMutableArray* jsonRoutes = [[NSMutableArray alloc] init];
-//
-//            for (int i = 0; i < [routes count]; ++i) {
-//                MMKDrivingRoute *_route = [routes objectAtIndex:i];
-//                NSMutableDictionary *jsonRoute = [[NSMutableDictionary alloc] init];
-//                [jsonRoute setValue:[NSString stringWithFormat:@"%d", i] forKey:@"id"];
-//                NSMutableArray* sections = [[NSMutableArray alloc] init];
-//                NSArray<MMKDrivingSection *> *_sections = [_route sections];
-//                for (int j = 0; j < [_sections count]; ++j) {
-//                    NSDictionary *jsonSection = [self convertDrivingRouteSection:_route withSection: [_sections objectAtIndex:j]];
-//                    [sections addObject:jsonSection];
-//                }
-//                [jsonRoute setValue:sections forKey:@"sections"];
-//                [jsonRoutes addObject:jsonRoute];
-//            }
-//
-//            [response setValue:jsonRoutes forKey:@"routes"];
-//            [strongSelf onReceiveNativeEvent: response];
-//        }];
+        MMKDrivingOptions *drivingOptions = [[MMKDrivingOptions alloc] init];
+        MMKDrivingVehicleOptions *vehicleOptions = [[MMKDrivingVehicleOptions alloc] init];
+
+        drivingSession = [drivingRouter requestRoutesWithPoints:_points drivingOptions:drivingOptions
+                                                 vehicleOptions:vehicleOptions routeHandler:^(NSArray<MMKDrivingRoute *> *routes, NSError *error) {
+            RNMView *strongSelf = weakSelf;
+
+            if (error != nil) {
+                [strongSelf onReceiveNativeEvent: @{@"id": _id, @"status": @"error"}];
+                return;
+            }
+
+            NSMutableDictionary* response = [[NSMutableDictionary alloc] init];
+            [response setValue:_id forKey:@"id"];
+            [response setValue:@"status" forKey:@"success"];
+            NSMutableArray* jsonRoutes = [[NSMutableArray alloc] init];
+
+            for (int i = 0; i < [routes count]; ++i) {
+                MMKDrivingRoute *_route = [routes objectAtIndex:i];
+                NSMutableDictionary *jsonRoute = [[NSMutableDictionary alloc] init];
+                [jsonRoute setValue:[NSString stringWithFormat:@"%d", i] forKey:@"id"];
+                NSMutableArray* sections = [[NSMutableArray alloc] init];
+                NSArray<MMKDrivingSection *> *_sections = [_route sections];
+                for (int j = 0; j < [_sections count]; ++j) {
+                    NSDictionary *jsonSection = [self convertDrivingRouteSection:_route withSection: [_sections objectAtIndex:j]];
+                    [sections addObject:jsonSection];
+                }
+                [jsonRoute setValue:sections forKey:@"sections"];
+                [jsonRoutes addObject:jsonRoute];
+            }
+
+            [response setValue:jsonRoutes forKey:@"routes"];
+            [strongSelf onReceiveNativeEvent: response];
+        }];
 
         return;
     }
@@ -290,12 +290,12 @@
     };
 
     if ([vehicles count] == 0) {
-        walkSession = [pedestrianRouter requestRoutesWithPoints:_points timeOptions:[[MMKTimeOptions alloc] init] routeHandler:_routeHandler];
+        walkSession = [pedestrianRouter requestRoutesWithPoints:_points timeOptions:[[MMKTimeOptions alloc] init] avoidSteep:false routeHandler:_routeHandler];
         return;
     }
 
     MMKTransitOptions *_transitOptions = [MMKTransitOptions transitOptionsWithAvoid:MMKFilterVehicleTypesNone timeOptions:[[MMKTimeOptions alloc] init]];
-    masstransitSession = [masstransitRouter requestRoutesWithPoints:_points transitOptions:_transitOptions routeHandler:_routeHandler];
+    masstransitSession = [masstransitRouter requestRoutesWithPoints:_points transitOptions:_transitOptions avoidSteep:false routeHandler:_routeHandler];
 }
 
 - (UIImage*)resolveUIImage:(NSString*)uri {
