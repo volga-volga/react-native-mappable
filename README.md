@@ -1,13 +1,11 @@
 
 ## React Native Mappable
 
-Библиотека для интеграции Mappable в React Native.
-
-## Пример
+Mappable MapKit SDK for React Native
 
 
 
-## Установка
+## Installation
 
 ```
 yarn add react-native-mappable
@@ -17,23 +15,22 @@ yarn add react-native-mappable
 npm i react-native-mappable --save
 ```
 
-### Линковка
+### Linking
 
-Если вы планируете использовать только API геокодера, то линковка библиотеки необязательна. В таком случае, можете отключить автолинкинг библиотеки для React Native **>0.60**.
+Linking is required to use Mappable MapKit (the library supports autolinking).
 
-Для использования Mappable MapKit необходима линковка (библиотека поддерживает автолинкинг).
 
-#### Линковка в React Native <0.60
+#### Linking React Native <0.60
 
 ```
 react-native link react-native-mappable
 ```
 
-## Использование карт
+## Using maps
 
-### Инициализировать карты
+### Initialize the maps
 
-Для этого лучше всего зайти в корневой файл приложения, например `App.js`, и добавить инициализацию:
+To do this, it is best to go to the root file of the application, for example, `App.js`, and add initialization:
 
 ```js
 import Mappable from 'react-native-mappable';
@@ -41,30 +38,30 @@ import Mappable from 'react-native-mappable';
 Mappable.init('API_KEY');
 ```
 
-### Изменение языка карт
+### Change the language
 
 ```js
 import Mappable from 'react-native-mappable';
 
 const currentLocale = await Mappable.getLocale();
-Mappable.setLocale('en_US');  // 'ru_RU' или другие
+Mappable.setLocale('en_US');
 Mappable.resetLocale();
 ```
 
--  **getLocale(): Promise\<string\>** - возвращает используемый язык карт;
+-  **getLocale(): Promise\<string\>** -  returns the map language used;
 
--  **setLocale(locale: string): Promise\<void\>** - установить язык карт;
+-  **setLocale(locale: string): Promise\<void\>** - set the language of the maps;
 
--  **resetLocale(): Promise\<void\>** - использовать для карт язык системы.
+-  **resetLocale(): Promise\<void\>** - use the system language for maps.
 
-Каждый метод возвращает Promise, который выполняется при ответе нативного SDK. Promise может отклониться, если SDK вернет ошибку.
+Each method returns a Promise that is executed when the native SDK responds. The Promise may be rejected if the SDK returns an error.
 
-**ВАЖНО!**
+**IMPORTANT!**
 
-1. Для **Android** изменение языка карт вступит в силу только после **перезапуска** приложения.
-2. Для **iOS** методы изменения языка можно вызывать только до первого рендера карты. Также нельзя повторно вызывать метод, если язык уже изменялся (можно только после перезапуска приложения), иначе изменения приняты не будут, а в терминал будет выведено сообщение с пердупреждением. В коде при этом не будет информации об ошибке.
+1. For **Android** changing the language of the maps will take effect only after **restarting** the application.
+2. For **iOS** language change methods can only be called before the first map rendering. Also, you cannot call the method again if the language has already been changed (it is possible only after restarting the application), otherwise the changes will not be accepted, and a warning message will be displayed in the terminal. There will be no error information in the code.
 
-### Использование компонента
+### Using the components
 
 ```jsx
 import React from 'react';
@@ -87,7 +84,7 @@ const Map = () => {
 };
 ```
 
-#### Основные типы
+#### Main types
 
 ```typescript
 interface Point {
@@ -155,11 +152,9 @@ interface RouteInfo<T extends(DrivingInfo | MasstransitInfo)> {
 }
 
 interface RoutesFoundEvent<T extends(DrivingInfo | MasstransitInfo)> {
-  nativeEvent:  {
     status: 'success' | 'error';
     id: string;
     routes: RouteInfo<T>[];
-  };
 }
 
 interface CameraPosition {
@@ -209,59 +204,59 @@ type MappableLogoPadding = {
 }
 ```
 
-#### Доступные `props` для компонента **MapView**:
+#### Available `props` for the **MapView** component:
 
-| Название | Тип | Стандартное значение | Описание |
-|--|--|--|--|
-| showUserPosition | boolean | true | Отслеживание геоданных и отображение позиции пользователя |
-| followUser | boolean | true | слежение камеры за пользователем |
-| userLocationIcon | ImageSource | false | Иконка для позиции пользователя. Доступны те же значения что и у компонента Image из React Native |
-| userLocationIconScale | number | 1 | Масштабирование иконки пользователя |
-| initialRegion | InitialRegion | | Изначальное местоположение карты при загрузке |
-| interactive | boolean | true | Интерактивная ли карта (перемещение по карте, отслеживание нажатий) |
-| nightMode | boolean | false | Использование ночного режима |
-| onMapLoaded | function | | Колбек на загрузку карты |
-| onCameraPositionChange | function | | Колбек на изменение положения камеры |
-| onCameraPositionChangeEnd | function | | Колбек при завершении изменения положения камеры |
-| onMapPress | function | | Событие нажития на карту. Возвращает координаты точки на которую нажали |
-| onMapLongPress | function | | Событие долгого нажития на карту. Возвращает координаты точки на которую нажали |
-| userLocationAccuracyFillColor | string |  | Цвет фона зоны точности определения позиции пользователя |
-| userLocationAccuracyStrokeColor | string |  | Цвет границы зоны точности определения позиции пользователя |
-| userLocationAccuracyStrokeWidth | number | | Толщина зоны точности определения позиции пользователя |
-| scrollGesturesEnabled | boolean | true | Включены ли жесты скролла |
-| zoomGesturesEnabled | boolean | true | Включены ли жесты зума |
-| tiltGesturesEnabled | boolean | true | Включены ли жесты наклона камеры двумя пальцами |
-| rotateGesturesEnabled | boolean | true | Включены ли жесты поворота камеры |
-| fastTapEnabled | boolean | true | Убрана ли задержка в 300мс при клике/тапе |
-| clusterColor | string | 'red' | Цвет фона метки-кластера |
-| maxFps | number | 60 | Максимальная частота обновления карты |
-| logoPosition | MappableLogoPosition | {} | Позиция логотипа на карте |
-| logoPadding | MappableLogoPadding | {} | Отступ логотипа на карте |
-| mapType | string | 'vector' | Тип карты |
-| mapStyle | string | {} | Стили карты |
+| Name | Type | Default value | Description                                                                                                                |
+|--|--|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| showUserPosition | boolean | true          | Tracking geodata and displaying the user's position. On Android you need request `android.permission.ACCESS_FINE_LOCATION` |
+| followUser | boolean | true          | Camera tracking of the user                                                                                                |
+| userLocationIcon | ImageSource | false         | The icon for the user's position. The same values are available as for the Image component from React Native               |
+| userLocationIconScale | number | 1             | Scaling the user's icon                                                                                                    |
+| initialRegion | InitialRegion |               | The original location of the map when loading                                                                              |
+| interactive | boolean | true          | Is the map interactive (moving around the map, tracking clicks)                                                            |
+| nightMode | boolean | false         | Using Night mode                                                                                                           |
+| onMapLoaded | function |               | Callback for maps loading                                                                                                  |
+| onCameraPositionChange | function |               | Callback for changing the camera position                                                                                  |
+| onCameraPositionChangeEnd | function |               | Callback at the end of the camera position change                                                                          |
+| onMapPress | function |               | The event of clicking on the map. Returns the coordinates of the clicked point                                             |
+| onMapLongPress | function |               | The event of a long click on the map. Returns the coordinates of the clicked point                                         |
+| userLocationAccuracyFillColor | string |               | The background color of the user position accuracy zone                                                                    |
+| userLocationAccuracyStrokeColor | string |               | The color of the border of the accuracy zone for determining the user's position                                           |
+| userLocationAccuracyStrokeWidth | number |               | The thickness of the accuracy zone for determining the user's position                                                     |
+| scrollGesturesEnabled | boolean | true          | Are scroll gestures enabled                                                                                                |
+| zoomGesturesEnabled | boolean | true          | Are zoom gestures enabled                                                                                                  |
+| tiltGesturesEnabled | boolean | true          | Are the camera tilt gestures enabled with two fingers                                                                      |
+| rotateGesturesEnabled | boolean | true          | Are camera rotation gestures enabled                                                                                       |
+| fastTapEnabled | boolean | true          | Has the 300ms delay been removed when clicking/tapping                                                                     |
+| clusterColor | string | 'red'         | The background color of the cluster placemark                                                                              |
+| maxFps | number | 60            | Maximum card refresh rate                                                                                                  |
+| logoPosition | MappableLogoPosition | {}            | The position of the Mappable logo on the map                                                                               |
+| logoPadding | MappableLogoPadding | {}            | Indentation of the Mappable logo on the map                                                                                |
+| mapType | string | 'vector'      | Map Type                                                                                                                   |
+| mapStyle | string | {}            | Map styles according to the documentation                                                                                  |
 
-#### Доступные методы для компонента **MapView**:
+#### Available methods for the **MapView** component:
 
--  `fitMarkers(points: Point[]): void` - подобрать положение камеры, чтобы вместить указанные маркеры (если возможно);
--  `fitAllMarkers(): void` - подобрать положение камеры, чтобы вместить все маркеры (если возможно);
--  `setCenter(center: { lon: number, lat: number }, zoom: number = 10, azimuth: number = 0, tilt: number = 0, duration: number = 0, animation: Animation = Animation.SMOOTH)` - устанавливает камеру в точку с заданным zoom, поворотом по азимуту и наклоном карты (`tilt`). Можно параметризовать анимацию: длительность и тип. Если длительность установить 0, то переход будет без анимации. Возможные типы анимаций `Animation.SMOOTH` и `Animation.LINEAR`;
--  `setZoom(zoom: number, duration: number, animation: Animation)` - изменить текущий zoom карты. Параметры `duration` и `animation` работают по аналогии с `setCenter`;
--  `getCameraPosition(callback: (position: CameraPosition) => void)` - запрашивает положение камеры и вызывает переданный колбек с текущим значением;
--  `getVisibleRegion(callback: (region: VisibleRegion) => void)` - запрашивает видимый регион и вызывает переданный колбек с текущим значением;
--  `findRoutes(points: Point[], vehicles: Vehicles[], callback: (event: RoutesFoundEvent) => void)` - запрос маршрутов через точки `points` с использованием транспорта `vehicles`. При получении маршрутов будет вызван `callback` с информацией обо всех маршрутах (подробнее в разделе **"Запрос маршрутов"**);
--  `findMasstransitRoutes(points: Point[], callback: (event: RoutesFoundEvent<MasstransitInfo>) => void): void` - запрос маршрутов на любом общественном транспорте;
--  `findPedestrianRoutes(points: Point[], callback: (event: RoutesFoundEvent<MasstransitInfo>) => void): void` - запрос пешеходного маршрута;
--  `findDrivingRoutes(points: Point[], callback: (event: RoutesFoundEvent<DrivingInfo>) => void): void` - запрос маршрута для автомобиля;
--  `setTrafficVisible(isVisible: boolean): void` - включить/отключить отображение слоя с пробками на картах;
--  `getScreenPoints(point: Point[], callback: (screenPoints: ScreenPoint[]) => void)` - получить кооординаты на экране (x и y) по координатам маркеров;
--  `getWorldPoints(screenPoint: ScreenPoint[], callback: (worldPoints: Point[]) => void)` - получить координаты точек (lat и lon) по координатам на экране.
+-  `fitMarkers(points: Point[]): void` - adjust the camera position to accommodate the specified markers (if possible);
+-  `fitAllMarkers(): void` - adjust the camera position to accommodate all markers (if possible);
+-  `setCenter(center: { lon: number, lat: number }, zoom: number = 10, azimuth: number = 0, tilt: number = 0, duration: number = 0, animation: Animation = Animation.SMOOTH)` - sets the camera to a point with the specified zoom, azimuth rotation and tilt of the map (tilt). You can parameterize the animation: duration and type. If the duration is set to 0, then the transition will be without animation. Possible animation types are `Animation.SMOOTH` and `Animation.LINEAR`;
+-  `setZoom(zoom: number, duration: number, animation: Animation)` - change the current zoom of the map. The `duration` and `animation` parameters work similarly to `setCenter`;
+-  `getCameraPosition(callback: (position: CameraPosition) => void)` - requests the camera position and calls the transmitted callback with the current value;
+-  `getVisibleRegion(callback: (region: VisibleRegion) => void)` - requests the visible region and calls the passed callback with the current value;
+-  `findRoutes(points: Point[], vehicles: Vehicles[], callback: (event: RoutesFoundEvent) => void)` - requesting routes through `points` using `vehicles` transport. When receiving routes, a `callback` will be called with information about all routes (for more information, see the section **"Requesting routes"**);
+-  `findMasstransitRoutes(points: Point[], callback: (event: RoutesFoundEvent<MasstransitInfo>) => void): void` - request routes on any public transport (builds in the city area);
+-  `findPedestrianRoutes(points: Point[], callback: (event: RoutesFoundEvent<MasstransitInfo>) => void): void` - request a walking route;
+-  `findDrivingRoutes(points: Point[], callback: (event: RoutesFoundEvent<DrivingInfo>) => void): void` - request a route for a car;
+-  `setTrafficVisible(isVisible: boolean): void` - enable/disable the display of the traffic layer on maps;
+-  `getScreenPoints(point: Point[], callback: (screenPoints: ScreenPoint[]) => void)` - get the coordinates on the screen (x and y) from the coordinates of the markers;
+-  `getWorldPoints(screenPoint: ScreenPoint[], callback: (worldPoints: Point[]) => void)` - get the coordinates of the points (lat and lon) from the coordinates on the screen.
 
-**ВАЖНО**
+**IMPORTANT**
 
-- Компонент карт стилизуется, как и `View` из React Native. Если карта не отображается, после инициализации с валидным ключем API, вероятно необходимо прописать стиль, который опишет размеры компонента (`height + width` или `flex`);
-- При использовании изображений из JS (через `require('./img.png')`) в дебаге и релизе на Android могут быть разные размеры маркера. Рекомендуется проверять рендер в релизной сборке.
+- The maps component is styled, just like the `View` from React Native. If the map is not displayed, after initialization with a valid API key, it is probably necessary to prescribe a style that describes the dimensions of the component (`height + width` or `flex`);
+- When using images from JS (via `require('./img.png')`) There may be different marker sizes in the launch and release on Android. It is recommended to check the render in the release build.
 
-## Отображение примитивов
+## Displaying primitives
 
 ### Marker
 
@@ -273,23 +268,24 @@ import { Marker, MappableMap } from 'react-native-mappable';
 </MappableMap>
 ```
 
-#### Доступные `props` для примитива **Marker**:
+#### Available `props` for the **Marker** primitive:
 
-| Название | Тип | Описание |
-|--|--|--|
-| point | Point | Координаты точки для отображения маркера |
-| scale | number | Масштабирование иконки маркера. Не работает если использовать children у маркера |
-| source | ImageSource | Данные для изображения маркера |
-| children | ReactElement | Рендер маркера как компонента |
-| onPress | function | Действие при нажатии/клике |
-| anchor | {  x:  number,  y:  number  } | Якорь иконки маркера. Координаты принимают значения от 0 до 1 |
-| zIndex | number | Отображение элемента по оси Z |
-| visible | boolean | Отображение маркера на карте |
+| Name | Type | Description                                                                   |
+|--|--|-------------------------------------------------------------------------------|
+| point | Point | Coordinates of the point to display the marker                                |
+| scale | number | Scaling of the marker icon. It doesn't work if you use children in the marker |
+| source | ImageSource | Data for the marker image                                                     |
+| children | ReactElement | Rendering a marker as a component                                             |
+| onPress | function | Click action                                                                  |
+| anchor | {  x:  number,  y:  number  } | The anchor of the marker icon. The coordinates take values from 0 to 1        |
+| zIndex | number | Displaying an element on the Z axis                                           |
+| visible | boolean | Displaying a marker on the map                                                |
+| rotated | boolean | Enables marker rotation                                                       |
 
-#### Доступные методы для примитива **Marker**:
+#### Available methods for the **Marker** primitive:
 
--  `animatedMoveTo(point: Point, duration: number)` - плавное изменение позиции маркера;
--  `animatedRotateTo(angle: number, duration: number)` - плавное вращение маркера.
+-  `animatedMoveTo(point: Point, duration: number)` - smooth change of marker position;
+-  `animatedRotateTo(angle: number, duration: number)` - smooth rotation of the marker. You should enable rotation via `rotated` prop
 
 ### Circle
 
@@ -301,17 +297,17 @@ import { Circle, MappableMap } from 'react-native-mappable';
 </MappableMap>
 ```
 
-#### Доступные `props` для примитива **Circle**:
+#### Available `props` for the **Circle** primitive:
 
-| Название | Тип | Описание |
+| Name | Type | Description |
 |--|--|--|
-| center | Point | Координаты центра круга |
-| radius | number | Радиус круга в метрах |
-| fillColor | string | Цвет заливки |
-| strokeColor | string | Цвет границы |
-| strokeWidth | number | Толщина границы |
-| onPress | function | Действие при нажатии/клике |
-| zIndex | number | Отображение элемента по оси Z |
+| center | Point | Coordinates of the center of the circle |
+| radius | number | The radius of the circle in meters |
+| fillColor | string | Fill color |
+| strokeColor | string | Border color |
+| strokeWidth | number | Border thickness |
+| onPress | function | Click action |
+| zIndex | number | Displaying an element on the Z axis |
 
 ### Polyline
 
@@ -329,20 +325,20 @@ import { Polyline, MappableMap } from 'react-native-mappable';
 </MappableMap>
 ```
 
-#### Доступные `props` для примитива **Polyline**:
+#### Available `props` for the **Polyline** primitive:
 
-| Название | Тип | Описание |
+| Name | Type | Description |
 |--|--|--|
-| points | Point[] | Массив точек линии |
-| strokeColor | string | Цвет линии |
-| strokeWidth | number | Толщина линии |
-| outlineColor | string | Цвет обводки |
-| outlineWidth | number | Толщина обводки |
-| dashLength | number | Длина штриха |
-| dashOffset | number | Отступ первого штриха от начала полилинии |
-| gapLength | number | Длина разрыва между штрихами |
-| onPress | function | Действие при нажатии/клике |
-| zIndex | number | Отображение элемента по оси Z |
+| points | Point[] | Array of line points |
+| strokeColor | string | Line color |
+| strokeWidth | number | Line thickness |
+| outlineColor | string | Outline color |
+| outlineWidth | number | Stroke thickness |
+| dashLength | number | Stroke length |
+| dashOffset | number | The indentation of the first stroke from the beginning of the polyline |
+| gapLength | number | The length of the gap between the strokes |
+| onPress | function | Click action |
+| zIndex | number | Displaying an element on the Z axis |
 
 ### Polygon
 
@@ -360,37 +356,37 @@ import {Polygon, MappableMap} from 'react-native-mappable';
 </MappableMap>
 ```
 
-#### Доступные `props` для примитива **Polygon**:
+#### Available `props` for the **Polygon** primitive:
 
-| Название | Тип | Описание |
+| Name | Type | Description |
 |--|--|--|
-| points | Point[] | Массив точек линии |
-| fillColor | string | Цвет заливки |
-| strokeColor | string | Цвет границы |
-| strokeWidth | number | Толщина границы |
-| innerRings | (Point[])[] | Массив полилиний, которые образуют отверстия в полигоне |
-| onPress | function | Действие при нажатии/клике |
-| zIndex | number | Отображение элемента по оси Z |
+| points | Point[] | Array of line points |
+| fillColor | string | Fill color |
+| strokeColor | string | Border color |
+| strokeWidth | number | Border thickness |
+| innerRings | (Point[])[] | An array of polylines that form holes in a polygon |
+| onPress | function | Click action |
+| zIndex | number | Displaying an element on the Z axis |
 
-## Запрос маршрутов
+## Request routes
 
-Маршруты можно запросить используя метод `findRoutes` компонента `MappableMap` (через ref).
+Routes can be requested using the `findRoutes` method of the `Mappable` component (via ref).
 
-`findRoutes(points: Point[], vehicles: Vehicles[], callback: (event: RoutesFoundEvent) => void)` - запрос маршрутов через точки `points` с использованием транспорта `vehicles`. При получении маршрутов будет вызван `callback` с информацией обо всех маршрутах.
+`findRoutes(points: Point[], vehicles: Vehicles[], callback: (event: RoutesFoundEvent) => void)` - requesting routes through `points` using `vehicles` transport. When receiving routes, a `callback` will be called with information about all routes.
 
-Доступны следующие роутеры из Mappable Kit:
+The following routers from Mappable MapKit are available:
 
--  **masstransit** - для маршрутов на общественном транспорте;
--  **pedestrian** - для пешеходных маршрутов;
--  **driving** - для маршрутов на автомобиле.
+-  **masstransit** - for public transport routes;
+-  **pedestrian** - for walking routes;
+-  **driving** - for routes by car.
 
-Тип роутера зависит от переданного в функцию массива `vehicles`:
+The type of router depends on the `vehicles` array passed to the function:
 
-- Если передан пустой массив (`this.map.current.findRoutes(points, [], () => null);`), то будет использован `PedestrianRouter`;
-- Если передан массив с одним элементом `'car'` (`this.map.current.findRoutes(points, ['car'], () => null);`), то будет использован `DrivingRouter`;
-- Во всех остальных случаях используется `MasstransitRouter`.
+- If an empty array is passed (`this.map.current.findRoutes(points, [], () => null);`), then the `PedestrianRouter` will be used;
+- If an array with a single `'car'` element is passed (`this.map.current.findRoutes(points, ['car'], () => null);`), then `DrivingRouter` will be used;
+- In all other cases, `MasstransitRouter` is used.
 
-Также можно использовать нужный роутер, вызвав соответствующую функцию
+You can also use the desired router by calling the appropriate function:
 
 ```typescript
 findMasstransitRoutes(points: Point[], callback: (event: RoutesFoundEvent) => void): void;
@@ -398,79 +394,44 @@ findPedestrianRoutes(points: Point[], callback: (event: RoutesFoundEvent) => voi
 findDrivingRoutes(points: Point[], callback: (event: RoutesFoundEvent) => void): void;
 ```
 
-#### Замечание
+#### Remark
 
-В зависимости от типа роутера информация о маршутах может незначительно отличаться.
+Depending on the type of router, the route information may vary slightly.
 
-## Поиск по гео с подсказсками (GeoSuggestions)
+## Geo search (GeoSearch)
 
-Для поиска с геоподсказками нужно воспользоваться модулем Suggest:
-
-```typescript
-
-import { Suggest } from 'react-native-mappable';
-
-const find = async (query: string, options?: SuggestOptions) => {
-  const suggestions = await Suggest.suggest(query, options);
-
-  // suggestion = [{
-  //   subtitle: "Москва, Россия"
-  //   title: "улица Льва Толстого, 16"
-  //   uri: "ymapsbm1://geo?ll=37.587093%2C55.733974&spn=0.001000%2C0.001000&text=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9B%D1%8C%D0%B2%D0%B0%20%D0%A2%D0%BE%D0%BB%D1%81%D1%82%D0%BE%D0%B3%D0%BE%2C%2016"
-  // }, ...]
-
-  const suggestionsWithCoards = await Suggest.suggestWithCoords(query, options);
-
-  // suggestionsWithCoards = [{
-  //   subtitle: "Москва, Россия"
-  //   title: "улица Льва Толстого, 16"
-  //   lat: 55.733974
-  //   lon: 37.587093
-  //   uri: "ymapsbm1://geo?ll=37.587093%2C55.733974&spn=0.001000%2C0.001000&text=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9B%D1%8C%D0%B2%D0%B0%20%D0%A2%D0%BE%D0%BB%D1%81%D1%82%D0%BE%D0%B3%D0%BE%2C%2016"
-  // }, ...]
-
-  // After searh session is finished
-  Suggest.reset();
-}
-```
-## Поиск по гео (GeoSearch)
-
-Для поиска нужно воспользоваться модулем Suggest:
+To search you need to use the Search module:
 
 ```typescript
 
 import { Search } from 'react-native-mappable';
 
 const find = async (query: string, options?: SuggestOptions) => {
-  // можно использовать Point, BoundingBox, Polyline и Polygon (4 точки, без innerRings)
+  // you can use Point, BoundingBox, Polyline и Polygon (4 points, without innerRings)
   const search = await Search.searchText(
-    'Москва',
+    query,
     { type: GeoFigureType.POINT, value: {lat: 54, lon: 53}},
     { disableSpellingCorrection: true, geometry: true },
   );
-
-  // второй параметр это зум, определяющий на сколько малые объекты искать
+  
   const searchByPoint = await Search.searchPoint({lat: 54, lon: 53}, 10, {
     disableSpellingCorrection: true,
     geometry: true,
   });
 
-  const resolveURI = await Search.resolveURI("ymapsbm1://geo?data=IgoNAQBYQhUBAFhC", {
+  const resolveURI = await Search.resolveURI("mappable://geo?data=IgoNAQBYQhUBAFhC", {
     disableSpellingCorrection: true,
     geometry: true,
   });
 
-  const searchByURI = await Search.searchByURI("ymapsbm1://geo?data=IgoNAQBYQhUBAFhC", {
+  const searchByURI = await Search.searchByURI("mappable://geo?data=IgoNAQBYQhUBAFhC", {
     disableSpellingCorrection: true,
     geometry: true,
   });
-  
-//   {"Components": [{"kind": "4", "name": "Малиновский сельсовет"}, {"kind": "4", "name": "Белебеевский район"}, {"kind": "3", "name": "Республика Башкортостан"}, {"kind": "19", "name": "Понтийско-Каспийская степь"}, {"kind": "19", "name": "Понтийско-Каспийская степь"}, {"kind": "19", "name": "Понтийско-Каспийская степь"}, {"kind": "3", "name": "Приволжский федеральный округ"}, {"kind": "1", "name": "Россия"}], "country_code": "RU", "formatted": "Россия, Республика Башкортостан, Белебеевский район, Малиновский сельсовет", "uri": "ymapsbm1://geo?data=IgoNAQBYQhUBAFhC"}
-  
 }
 ```
 
-Также теперь можно воспользоваться геокодированием из поиска
+You can also now use simplified geocoding methods
 
 ```typescript
 
@@ -478,16 +439,30 @@ import { Search } from 'react-native-mappable';
 
 const address = Search.geocodePoint({lat: 54, lon: 53});
 
-// {"Components": [{"kind": "4", "name": "Малиновский сельсовет"}, {"kind": "4", "name": "Белебеевский район"}, {"kind": "3", "name": "Республика Башкортостан"}, {"kind": "19", "name": "Понтийско-Каспийская степь"}, {"kind": "19", "name": "Понтийско-Каспийская степь"}, {"kind": "19", "name": "Понтийско-Каспийская степь"}, {"kind": "3", "name": "Приволжский федеральный округ"}, {"kind": "1", "name": "Россия"}], "country_code": "RU", "formatted": "Россия, Республика Башкортостан, Белебеевский район, Малиновский сельсовет", "uri": "ymapsbm1://geo?data=IgoNAQBYQhUBAFhC"}
-
 const point = Search.geocodeAddress(address.formatted);
-
-// возвращает координаты по адресу {"lat": 53.999187242158015, "lon": 54.089440735780194}
 
 ```
 
 
-### Использование компонента ClusteredMappable
+## Geo search with hints (GeoSuggestions)
+
+To search with hints, you need to use the Suggest module:
+
+```typescript
+
+import { Suggest } from 'react-native-mappable';
+
+const find = async (query: string, options?: SuggestOptions) => {
+  const suggestions = await Suggest.suggest(query, options);
+  
+  const suggestionsWithCoards = await Suggest.suggestWithCoords(query, options);
+
+  // After searh session is finished
+  Suggest.reset();
+}
+```
+
+### Using component ClusteredMappable
 
 ```jsx
 import React from 'react';
