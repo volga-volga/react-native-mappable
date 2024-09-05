@@ -22,7 +22,7 @@ class MappablePolyline(context: Context?) : ViewGroup(context), MapObjectTapList
     private var outlineColor = Color.BLACK
     private var strokeColor = Color.BLACK
     private var zIndex = 1
-    private var strokeWidth = 3f
+    private var strokeWidth = 1f
     private var dashLength = 1
     private var gapLength = 0
     private var dashOffset = 0f
