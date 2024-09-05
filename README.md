@@ -10,7 +10,7 @@ Mappable MapKit SDK for React Native
 ```
 yarn add react-native-mappable
 ```
-или
+or
 ```
 npm i react-native-mappable --save
 ```
