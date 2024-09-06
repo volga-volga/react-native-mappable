@@ -1,6 +1,6 @@
 {
   "name": "react-native-mappable",
-  "version": "4.7.2-b.2",
+  "version": "4.7.2",
   "description": "Mappable Kit for react-native",
   "main": "build/index.js",
   "types": "build/index.d.ts",
