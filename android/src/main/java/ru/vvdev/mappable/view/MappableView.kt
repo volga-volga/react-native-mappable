@@ -82,7 +82,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
     private var userLocationIconScale = 1f
     private var userLocationBitmap: Bitmap? = null
     private val routeMng = RouteManager()
-    var routeOptions: RouteOptions = RouteOptions(FitnessOptions(false))
+    private var routeOptions: RouteOptions = RouteOptions(FitnessOptions(false))
     private val masstransitRouter = TransportFactory.getInstance().createMasstransitRouter()
     private val drivingRouter: DrivingRouter
     private val pedestrianRouter = TransportFactory.getInstance().createPedestrianRouter()
