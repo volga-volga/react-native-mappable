@@ -57,7 +57,7 @@ class RNMappableModule internal constructor(context: ReactApplicationContext?) :
     @ReactMethod
     fun setLocale(locale: String?, successCb: Callback, errorCb: Callback?) {
         UiThreadUtil.runOnUiThread(Thread {
-            I18nManagerFactory.setLocale(locale)
+            MapKitFactory.setLocale(locale)
             successCb.invoke()
         })
     }
