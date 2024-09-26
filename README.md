@@ -122,9 +122,6 @@ type MasstransitVehicles = 'bus' | 'trolleybus' | 'tramway' | 'minibus' | 'subur
 
 type Vehicles = MasstransitVehicles | 'walk' | 'car';
 
-type MapType = 'none' | 'raster' | 'vector';
-
-
 interface DrivingInfo {
   time: string;
   timeWithTraffic: string;
@@ -232,7 +229,6 @@ type MappableLogoPadding = {
 | maxFps | number | 60            | Maximum card refresh rate                                                                                                  |
 | logoPosition | MappableLogoPosition | {}            | The position of the Mappable logo on the map                                                                               |
 | logoPadding | MappableLogoPadding | {}            | Indentation of the Mappable logo on the map                                                                                |
-| mapType | string | 'vector'      | Map Type                                                                                                                   |
 | mapStyle | string | {}            | Map styles according to the documentation                                                                                  |
 
 #### Available methods for the **MapView** component:

@@ -21,7 +21,6 @@ import {
   CameraPosition,
   VisibleRegion,
   InitialRegion,
-  MapType,
   Animation,
   MapLoaded,
   MappableLogoPosition,
@@ -37,7 +36,6 @@ export interface MappableMapProps extends ViewProps {
   showUserPosition?: boolean;
   nightMode?: boolean;
   mapStyle?: string;
-  mapType?: MapType;
   onCameraPositionChange?: (event: NativeSyntheticEvent<CameraPosition>) => void;
   onCameraPositionChangeEnd?: (event: NativeSyntheticEvent<CameraPosition>) => void;
   onMapPress?: (event: NativeSyntheticEvent<Point>) => void;
