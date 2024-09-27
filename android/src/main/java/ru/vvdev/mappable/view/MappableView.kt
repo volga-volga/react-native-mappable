@@ -15,6 +15,10 @@ import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.WritableNativeArray
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import ru.vvdev.mappable.models.ReactMapObject
+import ru.vvdev.mappable.utils.Callback
+import ru.vvdev.mappable.utils.ImageLoader.DownloadImageBitmap
+import ru.vvdev.mappable.utils.RouteManager
 import world.mappable.mapkit.Animation
 import world.mappable.mapkit.MapKitFactory
 import world.mappable.mapkit.RequestPoint
@@ -52,8 +56,11 @@ import world.mappable.mapkit.mapview.MapView
 import world.mappable.mapkit.traffic.TrafficLayer
 import world.mappable.mapkit.traffic.TrafficLevel
 import world.mappable.mapkit.traffic.TrafficListener
+import world.mappable.mapkit.transport.TransportFactory
 import world.mappable.mapkit.transport.masstransit.FilterVehicleTypes
+import world.mappable.mapkit.transport.masstransit.FitnessOptions
 import world.mappable.mapkit.transport.masstransit.Route
+import world.mappable.mapkit.transport.masstransit.RouteOptions
 import world.mappable.mapkit.transport.masstransit.Section
 import world.mappable.mapkit.transport.masstransit.Session
 import world.mappable.mapkit.transport.masstransit.TimeOptions
@@ -65,11 +72,6 @@ import world.mappable.mapkit.user_location.UserLocationObjectListener
 import world.mappable.mapkit.user_location.UserLocationView
 import world.mappable.runtime.Error
 import world.mappable.runtime.image.ImageProvider
-import ru.vvdev.mappable.models.ReactMapObject
-import ru.vvdev.mappable.utils.Callback
-import ru.vvdev.mappable.utils.ImageLoader.DownloadImageBitmap
-import ru.vvdev.mappable.utils.RouteManager
-import world.mappable.mapkit.transport.TransportFactory
 import javax.annotation.Nonnull
 
 
@@ -80,6 +82,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
     private var userLocationIconScale = 1f
     private var userLocationBitmap: Bitmap? = null
     private val routeMng = RouteManager()
+    private var routeOptions: RouteOptions = RouteOptions(FitnessOptions(false))
     private val masstransitRouter = TransportFactory.getInstance().createMasstransitRouter()
     private val drivingRouter: DrivingRouter
     private val pedestrianRouter = TransportFactory.getInstance().createPedestrianRouter()
@@ -336,11 +339,11 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
             }
         }
         if (vehicles.size == 0) {
-            pedestrianRouter.requestRoutes(_points, TimeOptions(), true, listener)
+            pedestrianRouter.requestRoutes(_points, TimeOptions(), routeOptions, listener)
             return
         }
         val transitOptions = TransitOptions(FilterVehicleTypes.NONE.value, TimeOptions())
-        masstransitRouter.requestRoutes(_points, transitOptions, true, listener)
+        masstransitRouter.requestRoutes(_points, transitOptions, routeOptions, listener)
     }
 
     fun fitAllMarkers() {

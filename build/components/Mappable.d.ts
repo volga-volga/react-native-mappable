@@ -1,13 +1,12 @@
 import React from 'react';
 import { ViewProps, ImageSourcePropType, NativeSyntheticEvent } from 'react-native';
-import { Point, ScreenPoint, DrivingInfo, MasstransitInfo, RoutesFoundEvent, Vehicles, CameraPosition, VisibleRegion, InitialRegion, MapType, Animation, MapLoaded, MappableLogoPosition, MappableLogoPadding } from '../interfaces';
+import { Point, ScreenPoint, DrivingInfo, MasstransitInfo, RoutesFoundEvent, Vehicles, CameraPosition, VisibleRegion, InitialRegion, Animation, MapLoaded, MappableLogoPosition, MappableLogoPadding } from '../interfaces';
 export interface MappableMapProps extends ViewProps {
     userLocationIcon?: ImageSourcePropType;
     userLocationIconScale?: number;
     showUserPosition?: boolean;
     nightMode?: boolean;
     mapStyle?: string;
-    mapType?: MapType;
     onCameraPositionChange?: (event: NativeSyntheticEvent<CameraPosition>) => void;
     onCameraPositionChangeEnd?: (event: NativeSyntheticEvent<CameraPosition>) => void;
     onMapPress?: (event: NativeSyntheticEvent<Point>) => void;
