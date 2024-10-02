@@ -20,6 +20,7 @@ class MappableCircle(context: Context?) : ViewGroup(context), MapObjectTapListen
     override var rnMapObject: MapObject? = null
     private var fillColor = Color.BLACK
     private var strokeColor = Color.BLACK
+    private var handled = true
     private var zIndex = 1
     private var strokeWidth = 2f
     private var center = Point(0.0, 0.0)
@@ -59,6 +60,10 @@ class MappableCircle(context: Context?) : ViewGroup(context), MapObjectTapListen
         updateCircle()
     }
 
+    fun setHandled(_handled: Boolean) {
+        handled = _handled
+    }
+
     fun setFillColor(_color: Int) {
         fillColor = _color
         updateCircle()
@@ -91,6 +96,6 @@ class MappableCircle(context: Context?) : ViewGroup(context), MapObjectTapListen
             id, "onPress", e
         )
 
-        return false
+        return handled
     }
 }

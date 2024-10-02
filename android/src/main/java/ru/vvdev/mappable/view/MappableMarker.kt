@@ -31,6 +31,7 @@ class MappableMarker(context: Context?) : ReactViewGroup(context), MapObjectTapL
     private var scale = 1f
     private var visible = true
     private var rotated = false
+    private var handled = true
     private var markerAnchor: PointF? = null
     private var iconSource: String? = null
     private var _childView: View? = null
@@ -130,6 +131,10 @@ class MappableMarker(context: Context?) : ReactViewGroup(context), MapObjectTapL
         updateMarker()
     }
 
+    fun setHandled(_handled: Boolean) {
+        handled = _handled
+    }
+
     fun setChildView(view: View?) {
         if (view == null) {
             _childView!!.removeOnLayoutChangeListener(childLayoutListener)
@@ -203,6 +208,6 @@ class MappableMarker(context: Context?) : ReactViewGroup(context), MapObjectTapL
             id, "onPress", e
         )
 
-        return false
+        return handled
     }
 }

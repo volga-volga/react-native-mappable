@@ -66,6 +66,12 @@ class MappableCircleManager internal constructor() : ViewGroupManager<MappableCi
         view.setZIndex(zIndex)
     }
 
+    @ReactProp(name = "handled")
+    fun setHandled(view: MappableCircle, handled: Boolean?) {
+        view.setHandled(handled ?: true)
+    }
+
+
     companion object {
         const val REACT_CLASS: String = "MappableCircle"
     }
