@@ -76,4 +76,12 @@ RCT_CUSTOM_VIEW_PROPERTY(zIndex, NSNumber, MappablePolylineView) {
     [view setZIndex: json];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(handled, NSNumber, MappablePolylineView) {
+    if (json == nil || [json boolValue]) {
+        [view setHandled: YES];
+    } else {
+        [view setHandled: NO];
+    }
+}
+
 @end

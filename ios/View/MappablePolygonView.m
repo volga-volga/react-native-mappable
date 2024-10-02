@@ -23,6 +23,7 @@
     UIColor* strokeColor;
     NSNumber* strokeWidth;
     NSNumber* zIndex;
+    BOOL handled;
 }
 
 - (instancetype)init {
@@ -33,6 +34,7 @@
     strokeWidth = [[NSNumber alloc] initWithInt:1];
     _points = [[NSMutableArray alloc] init];
     innerRings = [[NSMutableArray alloc] init];
+    handled = YES;
     polygon = [MMKPolygon polygonWithOuterRing:[MMKLinearRing linearRingWithPoints:@[]] innerRings:@[]];
 
     return self;
@@ -97,11 +99,15 @@
     [self updatePolygon];
 }
 
+- (void)setHandled:(BOOL)_handled {
+    handled = _handled;
+}
+
 - (BOOL)onMapObjectTapWithMapObject:(nonnull MMKMapObject*)mapObject point:(nonnull MMKPoint*)point {
     if (self.onPress)
         self.onPress(@{});
 
-    return YES;
+    return handled;
 }
 
 - (NSMutableArray<MMKPoint*>*)getPoints {

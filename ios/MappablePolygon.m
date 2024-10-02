@@ -72,4 +72,12 @@ RCT_CUSTOM_VIEW_PROPERTY(zIndex, NSNumber, MappablePolygonView) {
     [view setZIndex: json];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(handled, NSNumber, MappablePolygonView) {
+    if (json == nil || [json boolValue]) {
+        [view setHandled: YES];
+    } else {
+        [view setHandled: NO];
+    }
+}
+
 @end

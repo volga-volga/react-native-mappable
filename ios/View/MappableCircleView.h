@@ -17,6 +17,7 @@
 - (MMKCircle*)getCircle;
 - (MMKPolygonMapObject*)getMapObject;
 - (void)setMapObject:(MMKCircleMapObject*)mapObject;
+- (void)setHandled:(BOOL)_handled;
 
 @end
 
