@@ -56,6 +56,14 @@ RCT_CUSTOM_VIEW_PROPERTY(visible, NSNumber, MappableMarkerView) {
     [view setVisible: json];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(handled, NSNumber, MappableMarkerView) {
+    if (json == nil || [json boolValue]) {
+        [view setHandled: YES];
+    } else {
+        [view setHandled: NO];
+    }
+}
+
 RCT_CUSTOM_VIEW_PROPERTY(anchor, NSDictionary, MappableMarkerView) {
     CGPoint point;
 

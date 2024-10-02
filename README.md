@@ -266,17 +266,18 @@ import { Marker, MappableMap } from 'react-native-mappable';
 
 #### Available `props` for the **Marker** primitive:
 
-| Name | Type | Description                                                                   |
-|--|--|-------------------------------------------------------------------------------|
-| point | Point | Coordinates of the point to display the marker                                |
-| scale | number | Scaling of the marker icon. It doesn't work if you use children in the marker |
-| source | ImageSource | Data for the marker image                                                     |
-| children | ReactElement | Rendering a marker as a component                                             |
-| onPress | function | Click action                                                                  |
-| anchor | {  x:  number,  y:  number  } | The anchor of the marker icon. The coordinates take values from 0 to 1        |
-| zIndex | number | Displaying an element on the Z axis                                           |
-| visible | boolean | Displaying a marker on the map                                                |
-| rotated | boolean | Enables marker rotation                                                       |
+| Name | Type | Description                                                                           |
+|--|--|---------------------------------------------------------------------------------------|
+| point | Point | Coordinates of the point to display the marker                                        |
+| scale | number | Scaling of the marker icon. It doesn't work if you use children in the marker         |
+| source | ImageSource | Data for the marker image                                                             |
+| children | ReactElement | Rendering a marker as a component                                                     |
+| onPress | function | Click action                                                                          |
+| anchor | {  x:  number,  y:  number  } | The anchor of the marker icon. The coordinates take values from 0 to 1                |
+| zIndex | number | Displaying an element on the Z axis                                                   |
+| visible | boolean | Displaying a marker on the map                                                        |
+| rotated | boolean | Enables marker rotation                                                               |
+| handled | boolean | Enable(**false**)/disable(**true**) event touch propagation for parent `default:true` |
 
 #### Available methods for the **Marker** primitive:
 
@@ -304,6 +305,7 @@ import { Circle, MappableMap } from 'react-native-mappable';
 | strokeWidth | number | Border thickness |
 | onPress | function | Click action |
 | zIndex | number | Displaying an element on the Z axis |
+| handled | boolean | Enable(**false**)/disable(**true**) event touch propagation for parent `default:true` |
 
 ### Polyline
 
@@ -335,6 +337,7 @@ import { Polyline, MappableMap } from 'react-native-mappable';
 | gapLength | number | The length of the gap between the strokes |
 | onPress | function | Click action |
 | zIndex | number | Displaying an element on the Z axis |
+| handled | boolean | Enable(**false**)/disable(**true**) event touch propagation for parent `default:true` |
 
 ### Polygon
 
@@ -363,6 +366,7 @@ import {Polygon, MappableMap} from 'react-native-mappable';
 | innerRings | (Point[])[] | An array of polylines that form holes in a polygon |
 | onPress | function | Click action |
 | zIndex | number | Displaying an element on the Z axis |
+| handled | boolean | Enable(**false**)/disable(**true**) event touch propagation for parent `default:true` |
 
 ## Request routes
 

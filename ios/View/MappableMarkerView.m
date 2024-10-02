@@ -28,6 +28,7 @@
     NSNumber* visible;
     NSMutableArray<UIView*>* _reactSubviews;
     UIView* _childView;
+    BOOL handled;
 }
 
 - (instancetype)init {
@@ -37,6 +38,7 @@
     rotated = [[NSNumber alloc] initWithInt:0];
     visible = [[NSNumber alloc] initWithInt:1];
     _reactSubviews = [[NSMutableArray alloc] init];
+    handled = YES;
     source = @"";
     lastSource = @"";
 
@@ -161,12 +163,16 @@
     [self updateClusterMarker];
 }
 
+- (void)setHandled:(BOOL)_handled {
+    handled = _handled;
+}
+
 // object tap listener
 - (BOOL)onMapObjectTapWithMapObject:(nonnull MMKMapObject*)_mapObject point:(nonnull MMKPoint*)point {
     if (self.onPress)
         self.onPress(@{});
 
-    return YES;
+    return handled;
 }
 
 - (MMKPoint*)getPoint {

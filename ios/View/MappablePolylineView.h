@@ -16,6 +16,7 @@
 - (void)setDashOffset:(NSNumber*)offset;
 - (void)setOutlineWidth:(NSNumber*)width;
 - (void)setZIndex:(NSNumber*)_zIndex;
+- (void)setHandled:(BOOL)_handled;
 - (void)setPolylinePoints:(NSArray<MMKPoint*>*)_points;
 - (NSMutableArray<MMKPoint*>*)getPoints;
 - (MMKPolyline*)getPolyline;

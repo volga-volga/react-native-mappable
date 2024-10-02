@@ -27,6 +27,7 @@ class MappablePolyline(context: Context?) : ViewGroup(context), MapObjectTapList
     private var gapLength = 0
     private var dashOffset = 0f
     private var outlineWidth = 0
+    private var handled = true
 
     init {
         polyline = Polyline(ArrayList())
@@ -102,12 +103,16 @@ class MappablePolyline(context: Context?) : ViewGroup(context), MapObjectTapList
         updatePolyline()
     }
 
+    fun setHandled(_handled: Boolean) {
+        handled = _handled
+    }
+
     override fun onMapObjectTap(mapObject: MapObject, point: Point): Boolean {
         val e = Arguments.createMap()
         (context as ReactContext).getJSModule(RCTEventEmitter::class.java).receiveEvent(
             id, "onPress", e
         )
 
-        return false
+        return handled
     }
 }

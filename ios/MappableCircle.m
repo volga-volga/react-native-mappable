@@ -65,4 +65,12 @@ RCT_CUSTOM_VIEW_PROPERTY(zIndex, NSNumber, MappableCircleView) {
     [view setZIndex: json];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(handled, NSNumber, MappableCircleView) {
+    if (json == nil || [json boolValue]) {
+        [view setHandled: YES];
+    } else {
+        [view setHandled: NO];
+    }
+}
+
 @end

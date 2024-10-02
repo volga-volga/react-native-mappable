@@ -14,6 +14,7 @@
 - (void)setZIndex:(NSNumber*)_zIndex;
 - (void)setPolygonPoints:(NSArray<MMKPoint*>*)_points;
 - (void)setInnerRings:(NSArray<NSArray<MMKPoint*>*>*)_innerRings;
+- (void)setHandled:(BOOL)_handled;
 - (NSMutableArray<MMKPoint*>*)getPoints;
 - (MMKPolygon*)getPolygon;
 - (MMKPolygonMapObject*)getMapObject;

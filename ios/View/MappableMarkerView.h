@@ -17,6 +17,7 @@
 - (void)setPoint:(MMKPoint*)_points;
 - (void)setAnchor:(NSValue*)_anchor;
 - (void)setVisible:(NSNumber*)_visible;
+- (void)setHandled:(BOOL)_handled;
 
 // REF
 - (void)animatedMoveTo:(MMKPoint*)point withDuration:(float)duration;
