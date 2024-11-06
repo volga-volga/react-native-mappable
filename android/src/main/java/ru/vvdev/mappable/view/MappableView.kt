@@ -92,6 +92,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
     private var userLocationAccuracyStrokeWidth = 0f
     private var trafficLayer: TrafficLayer? = null
     private var maxFps = 60f
+    private var initializedRegion = false;
 
     private var userLocationView: UserLocationView? = null
 
@@ -470,6 +471,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
     }
 
     fun setInitialRegion(params: ReadableMap?) {
+        if (initializedRegion) return
         if ((!params!!.hasKey("lat") || params.isNull("lat")) || (!params.hasKey("lon") && params.isNull(
                 "lon"
             ))
@@ -498,6 +500,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
             initialRegionTilt
         )
         setCenter(initialCameraPosition, 0f, 0)
+        initializedRegion = true
     }
 
     fun setLogoPosition(params: ReadableMap?) {

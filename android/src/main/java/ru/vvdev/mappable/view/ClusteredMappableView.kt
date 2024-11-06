@@ -37,8 +37,8 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             val placemark = placemarks[i]
             placemarksMap["" + placemark.geometry.latitude + placemark.geometry.longitude] =
                 placemark
-            val child: Any = getChildAt(i)
-            if (child is MappableMarker) {
+            val child: Any? = getChildAt(i)
+            if (child != null && child is MappableMarker) {
                 child.setMarkerMapObject(placemark)
             }
         }
@@ -61,8 +61,8 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             val placemark = placemarks[i]
             placemarksMap["" + placemark.geometry.latitude + placemark.geometry.longitude] =
                 placemark
-            val child: Any = getChildAt(i)
-            if (child is MappableMarker) {
+            val child: Any? = getChildAt(i)
+            if (child != null && child is MappableMarker) {
                 child.setMarkerMapObject(placemark)
             }
         }
