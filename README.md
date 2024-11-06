@@ -203,33 +203,33 @@ type MappableLogoPadding = {
 
 #### Available `props` for the **MapView** component:
 
-| Name | Type | Default value | Description                                                                                                                |
-|--|--|---------------|----------------------------------------------------------------------------------------------------------------------------|
-| showUserPosition | boolean | true          | Tracking geodata and displaying the user's position. On Android you need request `android.permission.ACCESS_FINE_LOCATION` |
-| followUser | boolean | true          | Camera tracking of the user                                                                                                |
-| userLocationIcon | ImageSource | false         | The icon for the user's position. The same values are available as for the Image component from React Native               |
-| userLocationIconScale | number | 1             | Scaling the user's icon                                                                                                    |
-| initialRegion | InitialRegion |               | The original location of the map when loading                                                                              |
-| interactive | boolean | true          | Is the map interactive (moving around the map, tracking clicks)                                                            |
-| nightMode | boolean | false         | Using Night mode                                                                                                           |
-| onMapLoaded | function |               | Callback for maps loading                                                                                                  |
-| onCameraPositionChange | function |               | Callback for changing the camera position                                                                                  |
-| onCameraPositionChangeEnd | function |               | Callback at the end of the camera position change                                                                          |
-| onMapPress | function |               | The event of clicking on the map. Returns the coordinates of the clicked point                                             |
-| onMapLongPress | function |               | The event of a long click on the map. Returns the coordinates of the clicked point                                         |
-| userLocationAccuracyFillColor | string |               | The background color of the user position accuracy zone                                                                    |
-| userLocationAccuracyStrokeColor | string |               | The color of the border of the accuracy zone for determining the user's position                                           |
-| userLocationAccuracyStrokeWidth | number |               | The thickness of the accuracy zone for determining the user's position                                                     |
-| scrollGesturesEnabled | boolean | true          | Are scroll gestures enabled                                                                                                |
-| zoomGesturesEnabled | boolean | true          | Are zoom gestures enabled                                                                                                  |
-| tiltGesturesEnabled | boolean | true          | Are the camera tilt gestures enabled with two fingers                                                                      |
-| rotateGesturesEnabled | boolean | true          | Are camera rotation gestures enabled                                                                                       |
-| fastTapEnabled | boolean | true          | Has the 300ms delay been removed when clicking/tapping                                                                     |
-| clusterColor | string | 'red'         | The background color of the cluster placemark                                                                              |
-| maxFps | number | 60            | Maximum card refresh rate                                                                                                  |
-| logoPosition | MappableLogoPosition | {}            | The position of the Mappable logo on the map                                                                               |
-| logoPadding | MappableLogoPadding | {}            | Indentation of the Mappable logo on the map                                                                                |
-| mapStyle | string | {}            | Map styles according to the documentation                                                                                  |
+| Name | Type | Default value | Description                                                                                                                                                                                        |
+|--|--|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| showUserPosition | boolean | true          | Tracking geodata and displaying the user's position. On Android you need request `android.permission.ACCESS_FINE_LOCATION`. On Ios you need add `NSLocationWhenInUseUsageDescription` in Info.plst |
+| followUser | boolean | true          | Camera tracking of the user                                                                                                                                                                        |
+| userLocationIcon | ImageSource | false         | The icon for the user's position. The same values are available as for the Image component from React Native                                                                                       |
+| userLocationIconScale | number | 1             | Scaling the user's icon                                                                                                                                                                            |
+| initialRegion | InitialRegion |               | The original location of the map when loading                                                                                                                                                      |
+| interactive | boolean | true          | Is the map interactive (moving around the map, tracking clicks)                                                                                                                                    |
+| nightMode | boolean | false         | Using Night mode                                                                                                                                                                                   |
+| onMapLoaded | function |               | Callback for maps loading                                                                                                                                                                          |
+| onCameraPositionChange | function |               | Callback for changing the camera position                                                                                                                                                          |
+| onCameraPositionChangeEnd | function |               | Callback at the end of the camera position change                                                                                                                                                  |
+| onMapPress | function |               | The event of clicking on the map. Returns the coordinates of the clicked point                                                                                                                     |
+| onMapLongPress | function |               | The event of a long click on the map. Returns the coordinates of the clicked point                                                                                                                 |
+| userLocationAccuracyFillColor | string |               | The background color of the user position accuracy zone                                                                                                                                            |
+| userLocationAccuracyStrokeColor | string |               | The color of the border of the accuracy zone for determining the user's position                                                                                                                   |
+| userLocationAccuracyStrokeWidth | number |               | The thickness of the accuracy zone for determining the user's position                                                                                                                             |
+| scrollGesturesEnabled | boolean | true          | Are scroll gestures enabled                                                                                                                                                                        |
+| zoomGesturesEnabled | boolean | true          | Are zoom gestures enabled                                                                                                                                                                          |
+| tiltGesturesEnabled | boolean | true          | Are the camera tilt gestures enabled with two fingers                                                                                                                                              |
+| rotateGesturesEnabled | boolean | true          | Are camera rotation gestures enabled                                                                                                                                                               |
+| fastTapEnabled | boolean | true          | Has the 300ms delay been removed when clicking/tapping                                                                                                                                             |
+| clusterColor | string | 'red'         | The background color of the cluster placemark                                                                                                                                                      |
+| maxFps | number | 60            | Maximum card refresh rate                                                                                                                                                                          |
+| logoPosition | MappableLogoPosition | {}            | The position of the Mappable logo on the map                                                                                                                                                       |
+| logoPadding | MappableLogoPadding | {}            | Indentation of the Mappable logo on the map                                                                                                                                                        |
+| mapStyle | string | {}            | Map styles according to the documentation                                                                                                                                                          |
 
 #### Available methods for the **MapView** component:
 
