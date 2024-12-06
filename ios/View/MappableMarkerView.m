@@ -59,9 +59,16 @@
         if ([_reactSubviews count] == 0) {
             if (![source isEqual:@""]) {
                 if (![source isEqual:lastSource]) {
-                    [mapObject setIconWithImage:[self resolveUIImage:source]];
-                    lastSource = source;
-                    [mapObject setIconStyleWithStyle:iconStyle];
+                    [self downloadImageFromURL:source completion:^(UIImage *image, NSError *error) {
+                        if (error) {
+                            NSLog(@"Error downloading image: %@", error.localizedDescription);
+                        } else {
+                            // Use the image (e.g., assign it to an UIImageView)
+                            [self->mapObject setIconWithImage:image];
+                            self->lastSource = self->source;
+                            [self->mapObject setIconStyleWithStyle:iconStyle];
+                        }
+                    }];
                 }
             }
         }
@@ -82,11 +89,17 @@
         [iconStyle setRotationType:rotated];
         if ([_reactSubviews count] == 0) {
             if (![source isEqualToString:@""] && source != nil) {
-                UIImage *image = [self resolveUIImage:source];
-                if (image) {
-                    [mapObject setIconWithImage:image];
-                    lastSource = source;
-                }
+                [self downloadImageFromURL:source completion:^(UIImage *image, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error downloading image: %@", error.localizedDescription);
+                    } else {
+                        // Use the image (e.g., assign it to an UIImageView)
+                        if (image) {
+                            [self->mapObject setIconWithImage:image];
+                            self->lastSource = self->source;
+                        }
+                    }
+                }];
             }
         }
         [mapObject setIconStyleWithStyle:iconStyle];
@@ -117,33 +130,34 @@
     [self updateMarker];
 }
 
-- (UIImage *)resolveUIImage:(NSString *)uri {
-    UIImage *icon = nil;
-
-    if (!uri || [uri isEqualToString:@""]) {
-        NSLog(@"URI is nil or empty");
-        return nil;
-    }
-
-    NSURL *url = [NSURL URLWithString:uri];
+- (void)downloadImageFromURL:(NSString *)urlString completion:(void (^)(UIImage *image, NSError *error))completion {
+    NSURL *url = [NSURL URLWithString:urlString];
     if (!url) {
-        NSLog(@"Failed to create URL from URI: %@", uri);
-        return nil;
+        NSError *urlError = [NSError errorWithDomain:@"InvalidURLError" code:0 userInfo:@{NSLocalizedDescriptionKey: @"The URL is invalid."}];
+        completion(nil, urlError);
+        return;
     }
 
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    if (!imageData) {
-        NSLog(@"Failed to load image data from URL: %@", uri);
-        return nil;
-    }
+    // Asynchronous download
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            completion(nil, error); // Pass the error back
+            return;
+        }
 
-    icon = [UIImage imageWithData:imageData];
-    if (!icon) {
-        NSLog(@"Failed to create image from loaded data: %@", uri);
-        return nil;
-    }
+        // Convert the data into an image
+        UIImage *image = [UIImage imageWithData:data];
+        if (image) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(image, nil); // Pass the image back on the main thread
+            });
+        } else {
+            NSError *imageError = [NSError errorWithDomain:@"ImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Failed to convert data to image."}];
+            completion(nil, imageError);
+        }
+    }];
 
-    return icon;
+    [dataTask resume]; // Start the task
 }
 
 - (void)setSource:(NSString*)_source {
