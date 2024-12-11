@@ -139,9 +139,10 @@
 }
 
 - (void)removeReactSubview:(UIView<RCTComponent>*) subview {
-     if ([subview isKindOfClass:[MappableMarkerView class]]) {
+     if ([subview isKindOfClass:[MappableMarkerView class]] && placemarks.count!=0) {
         MappableMarkerView* marker = (MappableMarkerView*) subview;
         [clusterCollection removeWithMapObject:[marker getMapObject]];
+        [placemarks removeObjectIdenticalTo:[marker getMapObject]];
     } else {
         NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
         for (int i = 0; i < childSubviews.count; i++) {
@@ -162,7 +163,6 @@
     float textRadius = sqrt(size.height * size.height + size.width * size.width) / 2;
     float internalRadius = textRadius + MARGIN_SIZE;
     float externalRadius = internalRadius + STROKE_SIZE;
-    UIImage *someImageView = [UIImage alloc];
     // This function returns a newImage, based on image, that has been:
     // - scaled to fit in (CGRect) rect
     // - and cropped within a circle of radius: rectWidth/2
