@@ -3,6 +3,7 @@ export * from './components/Marker';
 export * from './components/Polygon';
 export * from './components/Polyline';
 export * from './components/Circle';
+export * from './components/MarkerImage';
 export * from './components/ClusteredMappable';
 export * from './interfaces';
 export * from './Suggest';

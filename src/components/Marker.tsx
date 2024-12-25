@@ -1,5 +1,5 @@
 import React from 'react';
-import { requireNativeComponent, Platform, ImageSourcePropType, UIManager, findNodeHandle } from 'react-native';
+import { requireNativeComponent, Platform, ImageSourcePropType, UIManager, findNodeHandle, View } from 'react-native';
 // @ts-ignore
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import { Point } from '../interfaces';
@@ -31,7 +31,7 @@ export class Marker extends React.Component<MarkerProps, State> {
 
   state = {
     recreateKey: false,
-    children: this.props.children
+    children: this.props.children,
   };
 
   private getCommand(cmd: string): any {
@@ -43,20 +43,13 @@ export class Marker extends React.Component<MarkerProps, State> {
   }
 
   static getDerivedStateFromProps(nextProps: MarkerProps, prevState: State): Partial<State> {
-    if (Platform.OS === 'ios') {
       return {
         children: nextProps.children,
         recreateKey:
           nextProps.children === prevState.children
             ? prevState.recreateKey
-            : !prevState.recreateKey
+            : !prevState.recreateKey,
       };
-    }
-
-    return {
-      children: nextProps.children,
-      recreateKey: Boolean(nextProps.children)
-    };
   }
 
   private resolveImageUri(img?: ImageSourcePropType) {
@@ -66,7 +59,8 @@ export class Marker extends React.Component<MarkerProps, State> {
   private getProps() {
     return {
       ...this.props,
-      source: this.resolveImageUri(this.props.source)
+      source: this.resolveImageUri(this.props.source),
+      children: undefined,
     };
   }
 
@@ -87,12 +81,27 @@ export class Marker extends React.Component<MarkerProps, State> {
   }
 
   render() {
+    if (Platform.OS === 'ios') {
+      return (
+        <NativeMarkerComponent
+          {...this.getProps()}
+          key={String(this.state.recreateKey)}
+          pointerEvents="none"
+        >
+          {this.state.children}
+        </NativeMarkerComponent>
+      );
+    }
+
     return (
       <NativeMarkerComponent
         {...this.getProps()}
-        key={String(this.state.recreateKey)}
-        pointerEvents='none'
-      />
+        pointerEvents="none"
+      >
+        <View key={String(this.state.recreateKey)}>
+          {this.props.children}
+        </View>
+      </NativeMarkerComponent>
     );
   }
 }

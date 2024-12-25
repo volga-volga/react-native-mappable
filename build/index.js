@@ -23,6 +23,7 @@ __exportStar(require("./components/Marker"), exports);
 __exportStar(require("./components/Polygon"), exports);
 __exportStar(require("./components/Polyline"), exports);
 __exportStar(require("./components/Circle"), exports);
+__exportStar(require("./components/MarkerImage"), exports);
 __exportStar(require("./components/ClusteredMappable"), exports);
 __exportStar(require("./interfaces"), exports);
 __exportStar(require("./Suggest"), exports);
