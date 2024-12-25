@@ -41,7 +41,7 @@ var Marker = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
             recreateKey: false,
-            children: _this.props.children
+            children: _this.props.children,
         };
         return _this;
     }
@@ -54,24 +54,18 @@ var Marker = /** @class */ (function (_super) {
         }
     };
     Marker.getDerivedStateFromProps = function (nextProps, prevState) {
-        if (react_native_1.Platform.OS === 'ios') {
-            return {
-                children: nextProps.children,
-                recreateKey: nextProps.children === prevState.children
-                    ? prevState.recreateKey
-                    : !prevState.recreateKey
-            };
-        }
         return {
             children: nextProps.children,
-            recreateKey: Boolean(nextProps.children)
+            recreateKey: nextProps.children === prevState.children
+                ? prevState.recreateKey
+                : !prevState.recreateKey,
         };
     };
     Marker.prototype.resolveImageUri = function (img) {
         return img ? (0, resolveAssetSource_1.default)(img).uri : '';
     };
     Marker.prototype.getProps = function () {
-        return __assign(__assign({}, this.props), { source: this.resolveImageUri(this.props.source) });
+        return __assign(__assign({}, this.props), { source: this.resolveImageUri(this.props.source), children: undefined });
     };
     Marker.prototype.animatedMoveTo = function (coords, duration) {
         react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('animatedMoveTo'), [coords, duration]);
@@ -80,7 +74,11 @@ var Marker = /** @class */ (function (_super) {
         react_native_1.UIManager.dispatchViewManagerCommand((0, react_native_1.findNodeHandle)(this), this.getCommand('animatedRotateTo'), [angle, duration]);
     };
     Marker.prototype.render = function () {
-        return (react_1.default.createElement(NativeMarkerComponent, __assign({}, this.getProps(), { key: String(this.state.recreateKey), pointerEvents: 'none' })));
+        if (react_native_1.Platform.OS === 'ios') {
+            return (react_1.default.createElement(NativeMarkerComponent, __assign({}, this.getProps(), { key: String(this.state.recreateKey), pointerEvents: "none" }), this.state.children));
+        }
+        return (react_1.default.createElement(NativeMarkerComponent, __assign({}, this.getProps(), { pointerEvents: "none" }),
+            react_1.default.createElement(react_native_1.View, { key: String(this.state.recreateKey) }, this.props.children)));
     };
     Marker.defaultProps = {
         rotated: false,
