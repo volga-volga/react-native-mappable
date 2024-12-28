@@ -35,6 +35,30 @@ var react_native_1 = require("react-native");
 // @ts-ignore
 var resolveAssetSource_1 = __importDefault(require("react-native/Libraries/Image/resolveAssetSource"));
 var NativeMarkerComponent = (0, react_native_1.requireNativeComponent)('MappableMarker');
+var deepCompareChildren = function (nextChildren, prevChildren) {
+    if (!nextChildren || !prevChildren) {
+        return nextChildren === prevChildren;
+    }
+    if (Array.isArray(nextChildren) && Array.isArray(prevChildren)) {
+        if (nextChildren.length !== prevChildren.length) {
+            return false;
+        }
+        return nextChildren.every(function (child, index) {
+            return deepCompareChildren(child, prevChildren[index]);
+        });
+    }
+    if (react_1.default.isValidElement(nextChildren) && react_1.default.isValidElement(prevChildren)) {
+        if (nextChildren.type !== prevChildren.type) {
+            return false;
+        }
+        if (nextChildren.key !== prevChildren.key) {
+            return false;
+        }
+        // @ts-ignore
+        return (deepCompareChildren(nextChildren.props.children, prevChildren.props.children) && JSON.stringify(nextChildren.props) === JSON.stringify(prevChildren.props));
+    }
+    return false;
+};
 var Marker = /** @class */ (function (_super) {
     __extends(Marker, _super);
     function Marker() {
@@ -54,12 +78,13 @@ var Marker = /** @class */ (function (_super) {
         }
     };
     Marker.getDerivedStateFromProps = function (nextProps, prevState) {
-        return {
-            children: nextProps.children,
-            recreateKey: nextProps.children === prevState.children
-                ? prevState.recreateKey
-                : !prevState.recreateKey,
-        };
+        if (!deepCompareChildren(nextProps.children, prevState.children)) {
+            return {
+                children: nextProps.children,
+                recreateKey: !prevState.recreateKey,
+            };
+        }
+        return __assign(__assign({}, prevState), { children: nextProps.children });
     };
     Marker.prototype.resolveImageUri = function (img) {
         return img ? (0, resolveAssetSource_1.default)(img).uri : '';

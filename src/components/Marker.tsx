@@ -24,6 +24,35 @@ interface State {
   children: any;
 }
 
+const deepCompareChildren = (nextChildren?: React.ReactElement, prevChildren?: React.ReactElement): boolean => {
+  if (!nextChildren || !prevChildren) {
+    return nextChildren===prevChildren;
+  }
+  if (Array.isArray(nextChildren) && Array.isArray(prevChildren)) {
+    if (nextChildren.length !== prevChildren.length) {
+      return false;
+    }
+    return nextChildren.every((child, index) =>
+      deepCompareChildren(child, prevChildren[index])
+    );
+  }
+
+  if (React.isValidElement(nextChildren) && React.isValidElement(prevChildren)) {
+    if (nextChildren.type !== prevChildren.type) {
+      return false;
+    }
+
+    if (nextChildren.key !== prevChildren.key) {
+      return false;
+    }
+    // @ts-ignore
+    return (deepCompareChildren(nextChildren.props.children, prevChildren.props.children) && JSON.stringify(nextChildren.props) === JSON.stringify(prevChildren.props));
+  }
+
+  return false;
+};
+
+
 export class Marker extends React.Component<MarkerProps, State> {
   static defaultProps = {
     rotated: false,
@@ -43,13 +72,16 @@ export class Marker extends React.Component<MarkerProps, State> {
   }
 
   static getDerivedStateFromProps(nextProps: MarkerProps, prevState: State): Partial<State> {
+    if (!deepCompareChildren(nextProps.children, prevState.children)) {
       return {
         children: nextProps.children,
-        recreateKey:
-          nextProps.children === prevState.children
-            ? prevState.recreateKey
-            : !prevState.recreateKey,
+        recreateKey: !prevState.recreateKey,
       };
+    }
+    return {
+      ...prevState,
+      children: nextProps.children,
+    }
   }
 
   private resolveImageUri(img?: ImageSourcePropType) {
