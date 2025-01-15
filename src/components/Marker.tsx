@@ -25,31 +25,38 @@ interface State {
 }
 
 const deepCompareChildren = (nextChildren?: React.ReactElement, prevChildren?: React.ReactElement): boolean => {
-  if (!nextChildren || !prevChildren) {
-    return nextChildren===prevChildren;
-  }
-  if (Array.isArray(nextChildren) && Array.isArray(prevChildren)) {
-    if (nextChildren.length !== prevChildren.length) {
-      return false;
+  try {
+    if (!nextChildren || !prevChildren) {
+      return nextChildren === prevChildren;
     }
-    return nextChildren.every((child, index) =>
-      deepCompareChildren(child, prevChildren[index])
-    );
-  }
-
-  if (React.isValidElement(nextChildren) && React.isValidElement(prevChildren)) {
-    if (nextChildren.type !== prevChildren.type) {
-      return false;
+    if (Array.isArray(nextChildren) && Array.isArray(prevChildren)) {
+      if (nextChildren.length !== prevChildren.length) {
+        return false;
+      }
+      return nextChildren.every((child, index) =>
+        deepCompareChildren(child, prevChildren[index])
+      );
     }
 
-    if (nextChildren.key !== prevChildren.key) {
-      return false;
-    }
-    // @ts-ignore
-    return (deepCompareChildren(nextChildren.props.children, prevChildren.props.children) && JSON.stringify(nextChildren.props) === JSON.stringify(prevChildren.props));
-  }
+    if (React.isValidElement(nextChildren) && React.isValidElement(prevChildren)) {
+      if (nextChildren.type !== prevChildren.type) {
+        return false;
+      }
 
-  return false;
+      if (nextChildren.key !== prevChildren.key) {
+        return false;
+      }
+      const nextChildrenProps = Object.fromEntries(Object.entries(nextChildren).filter(([key]) => key !== 'children'));
+      const prevChildrenProps = Object.fromEntries(Object.entries(prevChildren).filter(([key]) => key !== 'children'));
+      // @ts-ignore
+      return (deepCompareChildren(nextChildren.props.children, prevChildren.props.children) &&
+      !(Object.keys(nextChildrenProps).find(key => nextChildrenProps[key] != prevChildrenProps[key]) && Object.keys(prevChildrenProps).find(key => nextChildrenProps[key] != prevChildrenProps[key])));
+    }
+
+    return false;
+  } catch (e) {
+    return false;
+  }
 };
 
 
@@ -113,24 +120,12 @@ export class Marker extends React.Component<MarkerProps, State> {
   }
 
   render() {
-    if (Platform.OS === 'ios') {
-      return (
-        <NativeMarkerComponent
-          {...this.getProps()}
-          key={String(this.state.recreateKey)}
-          pointerEvents="none"
-        >
-          {this.state.children}
-        </NativeMarkerComponent>
-      );
-    }
-
     return (
       <NativeMarkerComponent
         {...this.getProps()}
         pointerEvents="none"
       >
-        <View key={String(this.state.recreateKey)}>
+        <View style={{position: 'absolute', zIndex: 10}} key={String(this.state.recreateKey)}>
           {this.props.children}
         </View>
       </NativeMarkerComponent>
