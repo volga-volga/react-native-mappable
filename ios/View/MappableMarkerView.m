@@ -101,8 +101,11 @@
                     }
                 }];
             }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setChildView];
+            });
         }
-        [mapObject setIconStyleWithStyle:iconStyle];
     }
 }
 
@@ -174,7 +177,7 @@
 - (void)setClusterMapObject:(MMKPlacemarkMapObject *)_mapObject {
     mapObject = _mapObject;
     [mapObject addTapListenerWithTapListener:self];
-    [self updateClusterMarker];
+    [self updateMarker];
 }
 
 - (void)setHandled:(BOOL)_handled {
