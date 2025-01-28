@@ -24,7 +24,8 @@ class RNMappablePackage : ReactPackage {
             MappablePolygonManager(),
             MappablePolylineManager(),
             MappableMarkerManager(),
-            MappableCircleManager()
+            MappableCircleManager(),
+            MappableDefaultMarkerManager()
         )
     }
 }
