@@ -39,12 +39,24 @@ enum class MarkerType(private val layoutInt: Int) {
     }
 }
 
+enum class MarkerAnchor(private val point: PointF) {
+    SMALL(PointF(0f, 0f)),
+    MIDDLE(PointF(0.16f, 0.4f)),
+    LARGE(PointF(0.21f, 0.95f));
+
+    companion object {
+        fun value(id: Int): PointF {
+            return entries[id].point;
+        }
+    }
+}
+
 class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapListener,
     ReactMapObject {
     @JvmField
     var point: Point? = null
     private var zIndex = 1
-    private var markerType: Int = 0
+    private var markerType: Int = 1
     private var markerText: String = ""
     private var markerSubText: String = ""
     private var markerColor = Color.BLACK
@@ -64,7 +76,7 @@ class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapLi
         val markerView: View =
             LayoutInflater.from(context).inflate(MarkerType.value(markerType), null)
         val markerTextLayout = markerView.findViewById<FrameLayout>(R.id.marker_text_layout);
-        if (markerText.toBoolean() && markerSubText.toBoolean()) {
+        if (markerText.isNotEmpty() || markerSubText.isNotEmpty()) {
             markerTextLayout.visibility = View.VISIBLE
             val markerViewText = markerView.findViewById<TextView>(R.id.marker_text);
             markerViewText.text = markerText
@@ -74,12 +86,19 @@ class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapLi
             markerTextLayout.visibility = View.GONE
         }
         val markerIconLayout = markerView.findViewById<FrameLayout>(R.id.marker_icon_layout);
-        val markerViewIcon = markerView.findViewById<FrameLayout>(R.id.marker_icon);
         markerIconLayout.backgroundTintList =
             ColorStateList(arrayOf(intArrayOf(markerColor)), intArrayOf(markerColor));
-        markerViewIcon.setBackgroundResource(DrawableResource.get(markerIcon).resId);
-        markerViewIcon.backgroundTintList =
-            ColorStateList(arrayOf(intArrayOf(markerIconColor)), intArrayOf(markerIconColor));
+        if (markerType>0) {
+            val markerViewIcon = markerView.findViewById<FrameLayout>(R.id.marker_icon);
+            markerViewIcon.setBackgroundResource(DrawableResource.get(markerIcon).resId);
+            markerViewIcon.backgroundTintList =
+                ColorStateList(arrayOf(intArrayOf(markerIconColor)), intArrayOf(markerIconColor));
+            if (markerType==2) {
+                val markerIconPointLayout = markerView.findViewById<FrameLayout>(R.id.marker_icon_point_layout);
+                markerIconPointLayout.backgroundTintList =
+                    ColorStateList(arrayOf(intArrayOf(markerColor)), intArrayOf(markerColor));
+            }
+        }
         // Convert the view to a bitmap
         markerView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
         markerView.layout(0, 0, markerView.measuredWidth, markerView.measuredHeight)
@@ -161,73 +180,75 @@ class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapLi
 
     private fun updateMarker() {
         if (rnMapObject != null && rnMapObject!!.isValid) {
-
             val iconStyle = IconStyle()
             iconStyle.setScale(scale)
             iconStyle.setRotationType(if (rotated) RotationType.ROTATE else RotationType.NO_ROTATION)
             iconStyle.setVisible(visible)
             if (markerAnchor != null) {
                 iconStyle.setAnchor(markerAnchor)
+            } else {
+                iconStyle.setAnchor(MarkerAnchor.value(markerType))
             }
 
             val b = createCustomMarker()
-            (rnMapObject as PlacemarkMapObject).setIcon(ImageProvider.fromBitmap(b))
+            (rnMapObject as PlacemarkMapObject).setIcon(ImageProvider.fromBitmap(b), iconStyle)
             (rnMapObject as PlacemarkMapObject).geometry = point!!
             (rnMapObject as PlacemarkMapObject).zIndex = zIndex.toFloat()
 
         }
     }
-        fun setMarkerMapObject(obj: MapObject?) {
-            rnMapObject = obj as PlacemarkMapObject?
-            rnMapObject!!.addTapListener(this)
-            updateMarker()
-        }
 
-        fun moveAnimationLoop(lat: Double, lon: Double) {
-            (rnMapObject as PlacemarkMapObject).geometry = Point(lat, lon)
-        }
+    fun setMarkerMapObject(obj: MapObject?) {
+        rnMapObject = obj as PlacemarkMapObject?
+        rnMapObject!!.addTapListener(this)
+        updateMarker()
+    }
 
-        fun rotateAnimationLoop(delta: Float) {
-            (rnMapObject as PlacemarkMapObject).direction = delta
-        }
+    fun moveAnimationLoop(lat: Double, lon: Double) {
+        (rnMapObject as PlacemarkMapObject).geometry = Point(lat, lon)
+    }
 
-        fun animatedMoveTo(point: Point, duration: Float) {
-            val p = (rnMapObject as PlacemarkMapObject).geometry
-            val startLat = p.latitude
-            val startLon = p.longitude
-            val deltaLat = point.latitude - startLat
-            val deltaLon = point.longitude - startLon
-            val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
-            valueAnimator.setDuration(duration.toLong())
-            valueAnimator.interpolator = LinearInterpolator()
-            valueAnimator.addUpdateListener { animation ->
-                try {
-                    val v = animation.animatedFraction
-                    moveAnimationLoop(startLat + v * deltaLat, startLon + v * deltaLon)
-                } catch (ex: Exception) {
-                    // I don't care atm..
-                }
+    fun rotateAnimationLoop(delta: Float) {
+        (rnMapObject as PlacemarkMapObject).direction = delta
+    }
+
+    fun animatedMoveTo(point: Point, duration: Float) {
+        val p = (rnMapObject as PlacemarkMapObject).geometry
+        val startLat = p.latitude
+        val startLon = p.longitude
+        val deltaLat = point.latitude - startLat
+        val deltaLon = point.longitude - startLon
+        val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+        valueAnimator.setDuration(duration.toLong())
+        valueAnimator.interpolator = LinearInterpolator()
+        valueAnimator.addUpdateListener { animation ->
+            try {
+                val v = animation.animatedFraction
+                moveAnimationLoop(startLat + v * deltaLat, startLon + v * deltaLon)
+            } catch (ex: Exception) {
+                // I don't care atm..
             }
-            valueAnimator.start()
         }
+        valueAnimator.start()
+    }
 
-        fun animatedRotateTo(angle: Float, duration: Float) {
-            val placemark = (rnMapObject as PlacemarkMapObject)
-            val startDirection = placemark.direction
-            val delta = angle - placemark.direction
-            val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
-            valueAnimator.setDuration(duration.toLong())
-            valueAnimator.interpolator = LinearInterpolator()
-            valueAnimator.addUpdateListener { animation ->
-                try {
-                    val v = animation.animatedFraction
-                    rotateAnimationLoop(startDirection + v * delta)
-                } catch (ex: Exception) {
-                    // I don't care atm..
-                }
+    fun animatedRotateTo(angle: Float, duration: Float) {
+        val placemark = (rnMapObject as PlacemarkMapObject)
+        val startDirection = placemark.direction
+        val delta = angle - placemark.direction
+        val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+        valueAnimator.setDuration(duration.toLong())
+        valueAnimator.interpolator = LinearInterpolator()
+        valueAnimator.addUpdateListener { animation ->
+            try {
+                val v = animation.animatedFraction
+                rotateAnimationLoop(startDirection + v * delta)
+            } catch (ex: Exception) {
+                // I don't care atm..
             }
-            valueAnimator.start()
         }
+        valueAnimator.start()
+    }
 
     override fun onMapObjectTap(mapObject: MapObject, point: Point): Boolean {
         val e = Arguments.createMap()

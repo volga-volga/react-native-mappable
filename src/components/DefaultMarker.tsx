@@ -12,8 +12,8 @@ export interface DefaultMarkerProps {
   icon?: number;
   text?: string;
   subText?: string;
-  color?: number;
-  iconColor?: number;
+  color?: string;
+  iconColor?: string;
   rotated?: boolean;
   onPress?: () => void;
   point: Point;

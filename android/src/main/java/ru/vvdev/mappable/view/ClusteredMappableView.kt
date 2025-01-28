@@ -38,7 +38,10 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             placemarksMap["" + placemark.geometry.latitude + placemark.geometry.longitude] =
                 placemark
             val child: Any? = getChildAt(i)
-            if (child != null && child is MappableMarker) {
+            if (child != null && (child is MappableMarker)) {
+                child.setMarkerMapObject(placemark)
+            }
+            if (child != null && (child is DefaultMarker)) {
                 child.setMarkerMapObject(placemark)
             }
         }
@@ -65,6 +68,9 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             if (child != null && child is MappableMarker) {
                 child.setMarkerMapObject(placemark)
             }
+            if (child != null && child is DefaultMarker) {
+                child.setMarkerMapObject(placemark)
+            }
         }
         clusterCollection.clusterPlacemarks(50.0, 12)
     }
@@ -78,7 +84,7 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
     }
 
     override fun removeChild(index: Int) {
-        if (getChildAt(index) is MappableMarker) {
+        if (getChildAt(index) is MappableMarker || getChildAt(index) is DefaultMarker) {
             val child = getChildAt(index) as MappableMarker ?: return
             val mapObject = child.rnMapObject
             if (mapObject == null || !mapObject.isValid) return

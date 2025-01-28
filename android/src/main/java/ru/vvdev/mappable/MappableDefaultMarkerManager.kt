@@ -1,5 +1,6 @@
 package ru.vvdev.mappable
 
+import android.graphics.Color
 import android.graphics.PointF
 import android.view.View
 import com.facebook.react.bridge.ReadableArray
@@ -49,33 +50,33 @@ class MappableDefaultMarkerManager internal constructor() : ViewGroupManager<Def
     }
 
     @ReactProp(name = "type")
-    fun setType(view: View, type: Int) {
-        castToMarkerView(view).setType(type)
+    fun setType(view: View, type: Int?) {
+        castToMarkerView(view).setType(type ?: 0)
     }
 
     @ReactProp(name = "icon")
-    fun setIcon(view: View, icon: Int) {
-        castToMarkerView(view).setIcon(icon)
+    fun setIcon(view: View, icon: Int?) {
+        castToMarkerView(view).setIcon(icon ?: 0)
     }
 
     @ReactProp(name = "text")
-    fun setText(view: View, text: String) {
-        castToMarkerView(view).setText(text)
+    fun setText(view: View, text: String?) {
+        castToMarkerView(view).setText(text ?: "")
     }
 
     @ReactProp(name = "subText")
-    fun setSubText(view: View, subText: String) {
-        castToMarkerView(view).setText(subText)
+    fun setSubText(view: View, subText: String?) {
+        castToMarkerView(view).setSubText(subText ?: "")
     }
 
     @ReactProp(name = "color")
-    fun setMarkerColor(view: View, color: Int) {
-        castToMarkerView(view).setMarkerColor(color)
+    fun setMarkerColor(view: View, color: Int?) {
+        castToMarkerView(view).setMarkerColor(color ?: Color.BLACK)
     }
 
     @ReactProp(name = "iconColor")
-    fun setMarkerIconColor(view: View, iconColor: Int) {
-        castToMarkerView(view).setMarkerIconColor(iconColor)
+    fun setMarkerIconColor(view: View, iconColor: Int?) {
+        castToMarkerView(view).setMarkerIconColor(iconColor ?: Color.BLACK)
     }
 
     @ReactProp(name = "zIndex")
