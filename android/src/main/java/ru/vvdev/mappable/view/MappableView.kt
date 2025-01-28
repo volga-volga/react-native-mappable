@@ -777,11 +777,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
             val _child = child
             val obj = mapWindow.map.mapObjects.addPolyline(_child.polyline)
             _child.setPolylineMapObject(obj)
-        } else if (child is MappableMarker) {
-            val _child = child
-            val obj = mapWindow.map.mapObjects.addPlacemark()
-            _child.setMarkerMapObject(obj)
-        } else if (child is DefaultMarker) {
+        } else if (child is IMarker) {
             val _child = child
             val obj = mapWindow.map.mapObjects.addPlacemark()
             _child.setMarkerMapObject(obj)

@@ -52,7 +52,7 @@ enum class MarkerAnchor(private val point: PointF) {
 }
 
 class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapListener,
-    ReactMapObject {
+    ReactMapObject, IMarker {
     @JvmField
     var point: Point? = null
     private var zIndex = 1
@@ -198,7 +198,11 @@ class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapLi
         }
     }
 
-    fun setMarkerMapObject(obj: MapObject?) {
+    override fun getPoint(): Point? {
+        return point;
+    }
+
+    override fun setMarkerMapObject(obj: MapObject?) {
         rnMapObject = obj as PlacemarkMapObject?
         rnMapObject!!.addTapListener(this)
         updateMarker()

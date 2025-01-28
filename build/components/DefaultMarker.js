@@ -29,12 +29,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DefaultMarker = void 0;
+exports.DefaultMarker = exports.MarkerIcon = exports.MarkerType = void 0;
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 // @ts-ignore
 var resolveAssetSource_1 = __importDefault(require("react-native/Libraries/Image/resolveAssetSource"));
 var utils_1 = require("../utils");
+var MarkerType;
+(function (MarkerType) {
+    MarkerType[MarkerType["SMALL"] = 0] = "SMALL";
+    MarkerType[MarkerType["MEDIUM"] = 1] = "MEDIUM";
+    MarkerType[MarkerType["LARGE"] = 2] = "LARGE";
+})(MarkerType = exports.MarkerType || (exports.MarkerType = {}));
+var MarkerIcon;
+(function (MarkerIcon) {
+    MarkerIcon[MarkerIcon["AIRPORT"] = 0] = "AIRPORT";
+})(MarkerIcon = exports.MarkerIcon || (exports.MarkerIcon = {}));
 var NativeMarkerComponent = (0, react_native_1.requireNativeComponent)('MappableDefaultMarker');
 var DefaultMarker = /** @class */ (function (_super) {
     __extends(DefaultMarker, _super);

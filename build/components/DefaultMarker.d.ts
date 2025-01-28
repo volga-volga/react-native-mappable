@@ -1,10 +1,18 @@
 import React from 'react';
 import { Point } from '../interfaces';
+export declare enum MarkerType {
+    SMALL = 0,
+    MEDIUM = 1,
+    LARGE = 2
+}
+export declare enum MarkerIcon {
+    AIRPORT = 0
+}
 export interface DefaultMarkerProps {
     zIndex?: number;
     scale?: number;
-    type?: number;
-    icon?: number;
+    type?: MarkerType;
+    icon?: MarkerIcon;
     text?: string;
     subText?: string;
     color?: string;

@@ -5,11 +5,21 @@ import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 import { Point } from '../interfaces';
 import {processColorProps} from '../utils';
 
+export enum MarkerType {
+  SMALL,
+  MEDIUM,
+  LARGE,
+}
+
+export enum MarkerIcon {
+  AIRPORT,
+}
+
 export interface DefaultMarkerProps {
   zIndex?: number;
   scale?: number;
-  type?: number;
-  icon?: number;
+  type?: MarkerType;
+  icon?: MarkerIcon;
   text?: string;
   subText?: string;
   color?: string;
