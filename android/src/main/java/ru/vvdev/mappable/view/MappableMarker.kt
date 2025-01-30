@@ -80,6 +80,35 @@ class MappableMarker(context: Context?) : ReactViewGroup(context), MapObjectTapL
         updateMarker()
     }
 
+//    private fun createCustomMarker(): Bitmap {
+//        val markerView: View = LayoutInflater.from(context).inflate(R.layout.custom_marker_layout, null)
+//        val markerTextLayout = markerView.findViewById<FrameLayout>(R.id.marker_text_layout);
+//        markerTextLayout.visibility = View.GONE
+////        val markerText = markerView.findViewById<TextView>(R.id.marker_text);
+////        markerText.setText("МаркерТекст1")
+////        val markerSubText = markerView.findViewById<TextView>(R.id.marker_sub_text);
+////        markerSubText.setText("МаркерСубТекст1")
+//        val markerIconLayout = markerView.findViewById<FrameLayout>(R.id.marker_icon_layout);
+//        val markerIcon = markerView.findViewById<FrameLayout>(R.id.marker_icon);
+//        markerIconLayout.backgroundTintList = ColorStateList(arrayOf(intArrayOf(Color.RED)), intArrayOf(Color.CYAN));
+//        markerIcon.setBackgroundResource(R.drawable.restaurants_24)
+//        markerIcon.backgroundTintList = ColorStateList(arrayOf(intArrayOf(Color.WHITE)), intArrayOf(Color.WHITE));
+////        markerIconLayout.background = ColorStateList(arrayOf(intArrayOf(Color.RED)), intArrayOf(Color.CYAN));
+//
+//        // Convert the view to a bitmap
+//        markerView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
+//        markerView.layout(0, 0, markerView.measuredWidth, markerView.measuredHeight)
+//        val bitmap = Bitmap.createBitmap(
+//            markerView.measuredWidth,
+//            markerView.measuredHeight,
+//            Bitmap.Config.ARGB_8888
+//        )
+//        val canvas = Canvas(bitmap)
+//        markerView.draw(canvas)
+//
+//        return bitmap
+//    }
+
     private fun updateMarker() {
         if (rnMapObject != null && rnMapObject!!.isValid) {
             val iconStyle = IconStyle()
