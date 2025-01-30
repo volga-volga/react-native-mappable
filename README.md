@@ -284,6 +284,38 @@ import { Marker, MappableMap } from 'react-native-mappable';
 -  `animatedMoveTo(point: Point, duration: number)` - smooth change of marker position;
 -  `animatedRotateTo(angle: number, duration: number)` - smooth rotation of the marker. You should enable rotation via `rotated` prop
 
+### DefaultMarker
+
+Only for Android
+```jsx
+import { DefaultMarker, MappableMap } from 'react-native-mappable';
+
+<MappableMap>
+  <DefaultMarker point={{ lat: 50, lon: 50 }}/>
+</MappableMap>
+```
+
+#### Available `props` for the **DefaultMarker** primitive:
+
+| Name    | Type                          | Description                                                                           |
+|---------|-------------------------------|---------------------------------------------------------------------------------------|
+| point   | Point                         | Coordinates of the point to display the marker                                        |
+| scale   | number                        | Scaling of the marker icon. It doesn't work if you use children in the marker         |
+| type    | DefaultMarkerType             | Type of marker                                                                        |
+| icon    | DefaultMarkerIcon             | Icon for marker (awailable for MEDIUM and LARGE)                                      |
+| onPress | function                      | Click action                                                                          |
+| anchor  | {  x:  number,  y:  number  } | The anchor of the marker icon. The coordinates take values from 0 to 1                |
+| zIndex  | number                        | Displaying an element on the Z axis                                                   |
+| visible | boolean                       | Displaying a marker on the map                                                        |
+| rotated | boolean                       | Enables marker rotation                                                               |
+| handled | boolean                       | Enable(**false**)/disable(**true**) event touch propagation for parent `default:true` |
+| text | string                        | Defines text for marker                                                               |
+| subText | string                        | Defines subtext for marker                                                            |
+| color | string                        | Defines color for marker                                                               |
+| iconColor | string                        | Defines iconColor for marker                                                            |
+
+#### Available methods for the **DefaultMarker** primitive same with **Marker**:
+
 ### Circle
 
 ```jsx
