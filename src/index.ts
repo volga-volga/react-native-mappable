@@ -4,6 +4,7 @@ export * from './components/Polygon';
 export * from './components/Polyline';
 export * from './components/Circle';
 export * from './components/ClusteredMappable';
+export * from './components/DefaultMarker';
 export * from './interfaces';
 export * from './Suggest';
 

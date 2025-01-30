@@ -12,6 +12,7 @@ import android.view.View
 import android.view.View.OnLayoutChangeListener
 import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
@@ -40,7 +41,7 @@ enum class MarkerType(private val layoutInt: Int) {
 }
 
 enum class MarkerAnchor(private val point: PointF) {
-    SMALL(PointF(0f, 0f)),
+    SMALL(PointF(0.5f, 0.5f)),
     MIDDLE(PointF(0.16f, 0.4f)),
     LARGE(PointF(0.21f, 0.95f));
 
@@ -56,7 +57,7 @@ class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapLi
     @JvmField
     var point: Point? = null
     private var zIndex = 1
-    private var markerType: Int = 1
+    private var markerType: Int = 0
     private var markerText: String = ""
     private var markerSubText: String = ""
     private var markerColor = Color.BLACK
@@ -75,12 +76,14 @@ class DefaultMarker(context: Context?) : ReactViewGroup(context), MapObjectTapLi
     private fun createCustomMarker(): Bitmap {
         val markerView: View =
             LayoutInflater.from(context).inflate(MarkerType.value(markerType), null)
-        val markerTextLayout = markerView.findViewById<FrameLayout>(R.id.marker_text_layout);
+        val markerTextLayout = markerView.findViewById<LinearLayout>(R.id.marker_text_layout);
         if (markerText.isNotEmpty() || markerSubText.isNotEmpty()) {
             markerTextLayout.visibility = View.VISIBLE
             val markerViewText = markerView.findViewById<TextView>(R.id.marker_text);
+            markerViewText.visibility = if (markerText.isNotEmpty()) View.VISIBLE else View.GONE
             markerViewText.text = markerText
             val markerViewSubText = markerView.findViewById<TextView>(R.id.marker_sub_text);
+            markerViewSubText.visibility = if (markerSubText.isNotEmpty()) View.VISIBLE else View.GONE
             markerViewSubText.text = markerSubText
         } else {
             markerTextLayout.visibility = View.GONE

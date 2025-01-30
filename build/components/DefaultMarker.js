@@ -29,22 +29,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DefaultMarker = exports.MarkerIcon = exports.MarkerType = void 0;
+exports.DefaultMarker = exports.DefaultMarkerIcon = exports.DefaultMarkerType = void 0;
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 // @ts-ignore
 var resolveAssetSource_1 = __importDefault(require("react-native/Libraries/Image/resolveAssetSource"));
 var utils_1 = require("../utils");
-var MarkerType;
-(function (MarkerType) {
-    MarkerType[MarkerType["SMALL"] = 0] = "SMALL";
-    MarkerType[MarkerType["MEDIUM"] = 1] = "MEDIUM";
-    MarkerType[MarkerType["LARGE"] = 2] = "LARGE";
-})(MarkerType = exports.MarkerType || (exports.MarkerType = {}));
-var MarkerIcon;
-(function (MarkerIcon) {
-    MarkerIcon[MarkerIcon["AIRPORT"] = 0] = "AIRPORT";
-})(MarkerIcon = exports.MarkerIcon || (exports.MarkerIcon = {}));
+var DefaultMarkerType;
+(function (DefaultMarkerType) {
+    DefaultMarkerType[DefaultMarkerType["SMALL"] = 0] = "SMALL";
+    DefaultMarkerType[DefaultMarkerType["MEDIUM"] = 1] = "MEDIUM";
+    DefaultMarkerType[DefaultMarkerType["LARGE"] = 2] = "LARGE";
+})(DefaultMarkerType = exports.DefaultMarkerType || (exports.DefaultMarkerType = {}));
+var DefaultMarkerIcon;
+(function (DefaultMarkerIcon) {
+    DefaultMarkerIcon[DefaultMarkerIcon["AIRFIELD"] = 0] = "AIRFIELD";
+    DefaultMarkerIcon[DefaultMarkerIcon["AIRPORT"] = 1] = "AIRPORT";
+    DefaultMarkerIcon[DefaultMarkerIcon["AUTO"] = 2] = "AUTO";
+    DefaultMarkerIcon[DefaultMarkerIcon["BARS"] = 3] = "BARS";
+    DefaultMarkerIcon[DefaultMarkerIcon["BEACH"] = 4] = "BEACH";
+    DefaultMarkerIcon[DefaultMarkerIcon["BUILDING"] = 5] = "BUILDING";
+    DefaultMarkerIcon[DefaultMarkerIcon["CAFE"] = 6] = "CAFE";
+    DefaultMarkerIcon[DefaultMarkerIcon["FAST_FOOD"] = 7] = "FAST_FOOD";
+    DefaultMarkerIcon[DefaultMarkerIcon["RESTAURANTS"] = 8] = "RESTAURANTS";
+    DefaultMarkerIcon[DefaultMarkerIcon["WC"] = 9] = "WC";
+})(DefaultMarkerIcon = exports.DefaultMarkerIcon || (exports.DefaultMarkerIcon = {}));
 var NativeMarkerComponent = (0, react_native_1.requireNativeComponent)('MappableDefaultMarker');
 var DefaultMarker = /** @class */ (function (_super) {
     __extends(DefaultMarker, _super);

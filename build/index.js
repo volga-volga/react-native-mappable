@@ -24,6 +24,7 @@ __exportStar(require("./components/Polygon"), exports);
 __exportStar(require("./components/Polyline"), exports);
 __exportStar(require("./components/Circle"), exports);
 __exportStar(require("./components/ClusteredMappable"), exports);
+__exportStar(require("./components/DefaultMarker"), exports);
 __exportStar(require("./interfaces"), exports);
 __exportStar(require("./Suggest"), exports);
 var Suggest_1 = require("./Suggest");

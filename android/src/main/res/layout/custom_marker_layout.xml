@@ -15,18 +15,19 @@
             android:id="@+id/marker_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/airport_24"
             />
     </FrameLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/marker_text_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_text_background"
         android:layout_marginLeft="37dp"
         android:paddingHorizontal="8dp"
-        android:paddingVertical="4dp">
+        android:paddingVertical="4dp"
+        >
 
         <TextView
             android:id="@+id/marker_text"
@@ -36,12 +37,11 @@
             android:textSize="14sp"
             />
         <TextView
-            android:paddingTop="16dp"
             android:id="@+id/marker_sub_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#7b7d85"
             android:textSize="12sp"
             />
-    </FrameLayout>
+    </LinearLayout>
 </RelativeLayout>
