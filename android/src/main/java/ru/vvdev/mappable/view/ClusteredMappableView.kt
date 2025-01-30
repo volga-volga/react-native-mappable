@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.View
+import ru.vvdev.mappable.models.ReactMapObject
 import world.mappable.mapkit.geometry.Point
 import world.mappable.mapkit.map.Cluster
 import world.mappable.mapkit.map.ClusterListener
@@ -38,7 +39,7 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             placemarksMap["" + placemark.geometry.latitude + placemark.geometry.longitude] =
                 placemark
             val child: Any? = getChildAt(i)
-            if (child != null && child is MappableMarker) {
+            if (child != null && (child is IMarker)) {
                 child.setMarkerMapObject(placemark)
             }
         }
@@ -62,7 +63,7 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             placemarksMap["" + placemark.geometry.latitude + placemark.geometry.longitude] =
                 placemark
             val child: Any? = getChildAt(i)
-            if (child != null && child is MappableMarker) {
+            if (child != null && child is IMarker) {
                 child.setMarkerMapObject(placemark)
             }
         }
@@ -70,20 +71,22 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
     }
 
     override fun addFeature(child: View?, index: Int) {
-        val marker = child as MappableMarker?
-        val placemark = placemarksMap["" + marker!!.point!!.latitude + marker.point!!.longitude]
-        if (placemark != null) {
-            marker.setMarkerMapObject(placemark)
+        if (child is IMarker) {
+            val marker = child as IMarker
+            val placemark = placemarksMap["" + marker.getPoint()!!.latitude + marker.getPoint()!!.longitude]
+            if (placemark != null) {
+                child.setMarkerMapObject(placemark)
+            }
         }
     }
 
     override fun removeChild(index: Int) {
-        if (getChildAt(index) is MappableMarker) {
-            val child = getChildAt(index) as MappableMarker ?: return
-            val mapObject = child.rnMapObject
+        if (getChildAt(index) is IMarker) {
+            val child = getChildAt(index) as IMarker ?: return
+            val mapObject = (child as ReactMapObject).rnMapObject
             if (mapObject == null || !mapObject.isValid) return
             clusterCollection.remove(mapObject)
-            placemarksMap.remove("" + child.point!!.latitude + child.point!!.longitude)
+            placemarksMap.remove("" + child.getPoint()!!.latitude + child.getPoint()!!.longitude)
         }
     }
 

@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <FrameLayout
+        android:id="@+id/marker_icon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="@drawable/rounded_marker_background"
+        android:backgroundTintMode="add"
+        >
+        <FrameLayout
+            android:id="@+id/marker_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/marker_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_text_background"
+        android:layout_marginLeft="37dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        >
+
+        <TextView
+            android:id="@+id/marker_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:id="@+id/marker_sub_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#7b7d85"
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+</RelativeLayout>

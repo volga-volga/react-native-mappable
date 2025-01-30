@@ -15,6 +15,7 @@ import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.WritableNativeArray
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import ru.vvdev.mappable.MappableDefaultMarkerManager
 import ru.vvdev.mappable.models.ReactMapObject
 import ru.vvdev.mappable.utils.Callback
 import ru.vvdev.mappable.utils.ImageLoader.DownloadImageBitmap
@@ -776,7 +777,7 @@ open class MappableView(context: Context?) : MapView(context), UserLocationObjec
             val _child = child
             val obj = mapWindow.map.mapObjects.addPolyline(_child.polyline)
             _child.setPolylineMapObject(obj)
-        } else if (child is MappableMarker) {
+        } else if (child is IMarker) {
             val _child = child
             val obj = mapWindow.map.mapObjects.addPlacemark()
             _child.setMarkerMapObject(obj)

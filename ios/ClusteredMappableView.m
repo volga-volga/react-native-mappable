@@ -20,9 +20,12 @@ RCT_EXPORT_MODULE()
         @"onCameraPositionReceived",
         @"onVisibleRegionReceived",
         @"onCameraPositionChange",
+        @"onCameraPositionChangeEnd",
         @"onMapPress",
         @"onMapLongPress",
-        @"onCameraPositionChangeEnd"
+        @"onMapLoaded",
+        @"onWorldToScreenPointsReceived",
+        @"onScreenToWorldPointsReceived"
     ];
 }
 
@@ -50,9 +53,12 @@ RCT_EXPORT_VIEW_PROPERTY(onRouteFound, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCameraPositionReceived, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onVisibleRegionReceived, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCameraPositionChange, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCameraPositionChangeEnd, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onMapPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onMapLongPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onCameraPositionChangeEnd, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMapLoaded, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onWorldToScreenPointsReceived, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onScreenToWorldPointsReceived, RCTBubblingEventBlock)
 
 RCT_CUSTOM_VIEW_PROPERTY(initialRegion, NSDictionary, RNMView) {
     if (json && view) {
@@ -150,6 +156,24 @@ RCT_CUSTOM_VIEW_PROPERTY(mapType, NSString, RNCMView) {
     }
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(interactive, BOOL, RNMView) {
+    if (json && view) {
+        [view setInteractive:[json boolValue]];
+    }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(logoPosition, BOOL, RNMView) {
+    if (json && view) {
+        [view setLogoPosition:json];
+    }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(logoPadding, BOOL, RNMView) {
+    if (json && view) {
+        [view setLogoPadding:json];
+    }
+}
+
 // ref
 RCT_EXPORT_METHOD(fitAllMarkers:(nonnull NSNumber*) reactTag) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
@@ -235,6 +259,48 @@ RCT_EXPORT_METHOD(getVisibleRegion:(nonnull NSNumber*) reactTag _id:(NSString*_N
             return;
         }
         [view emitVisibleRegionToJS:_id];
+    }];
+}
+
+RCT_EXPORT_METHOD(setTrafficVisible:(nonnull NSNumber *)reactTag traffic:(BOOL)traffic) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        RNMView *view = (RNMView *)viewRegistry[reactTag];
+
+        if (!view || ![view isKindOfClass:[RNMView class]]) {
+            RCTLogError(@"Cannot find NativeView with tag #%@", reactTag);
+            return;
+        }
+
+        [view setTrafficVisible:traffic];
+    }];
+}
+
+
+RCT_EXPORT_METHOD(getScreenPoints:(nonnull NSNumber *)reactTag json:(id)json _id:(NSString *_Nonnull)_id) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        RNMView *view = (RNMView *)viewRegistry[reactTag];
+
+        if (!view || ![view isKindOfClass:[RNMView class]]) {
+            RCTLogError(@"Cannot find NativeView with tag #%@", reactTag);
+            return;
+        }
+
+        NSArray<MMKPoint *> *mapPoints = [RCTConvert Points:json];
+        [view emitWorldToScreenPoint:mapPoints withId:_id];
+    }];
+}
+
+RCT_EXPORT_METHOD(getWorldPoints:(nonnull NSNumber *)reactTag json:(id)json _id:(NSString *_Nonnull)_id) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        RNCMView *view = (RNCMView *)viewRegistry[reactTag];
+
+        if (!view || ![view isKindOfClass:[RNMView class]]) {
+            RCTLogError(@"Cannot find NativeView with tag #%@", reactTag);
+            return;
+        }
+
+        NSArray<MMKScreenPoint *> *screenPoints = [RCTConvert ScreenPoints:json];
+        [view emitScreenToWorldPoint:screenPoints withId:_id];
     }];
 }
 
