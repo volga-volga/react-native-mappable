@@ -9,6 +9,9 @@
 #import <NSObjCRuntime.h>
 #endif
 
+#import "MappablePolygonView.h"
+#import "MappablePolylineView.h"
+#import "MappableCircleView.h"
 #import "RNCMView.h"
 #import <MappableMarkerView.h>
 
@@ -128,18 +131,38 @@
 }
 
 - (void)insertReactSubview:(UIView<RCTComponent>*) subview atIndex:(NSInteger) atIndex {
-     if ([subview isKindOfClass:[MappableMarkerView class]]) {
+    if ([subview isKindOfClass:[MappableMarkerView class]]) {
         MappableMarkerView* marker = (MappableMarkerView*) subview;
-         if (atIndex<[placemarks count]) {
-             [marker setClusterMapObject:[placemarks objectAtIndex:atIndex]];
-         }
+        if (atIndex<[placemarks count]) {
+            [marker setClusterMapObject:[placemarks objectAtIndex:atIndex]];
+        }
+    } else  if ([subview isKindOfClass:[MappablePolygonView class]]) {
+        MMKMapObjectCollection *objects = self.mapWindow.map.mapObjects;
+        MappablePolygonView *polygon = (MappablePolygonView *) subview;
+        MMKPolygonMapObject *obj = [objects addPolygonWithPolygon:[polygon getPolygon]];
+        [polygon setMapObject:obj];
+    } else if ([subview isKindOfClass:[MappablePolylineView class]]) {
+        MMKMapObjectCollection *objects = self.mapWindow.map.mapObjects;
+        MappablePolylineView *polyline = (MappablePolylineView*) subview;
+        MMKPolylineMapObject *obj = [objects addPolylineWithPolyline:[polyline getPolyline]];
+        [polyline setMapObject:obj];
+    } else if ([subview isKindOfClass:[MappableCircleView class]]) {
+        MMKMapObjectCollection *objects = self.mapWindow.map.mapObjects;
+        MappableCircleView *circle = (MappableCircleView*) subview;
+        MMKCircleMapObject *obj = [objects addCircleWithCircle:[circle getCircle]];
+        [circle setMapObject:obj];
+    } else {
+        NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
+        for (int i = 0; i < childSubviews.count; i++) {
+          [self insertReactSubview:(UIView *)childSubviews[i] atIndex:atIndex];
+        }
     }
     [_reactSubviews insertObject:subview atIndex:atIndex];
     [super insertMarkerReactSubview:subview atIndex:atIndex];
 }
 
 - (void)removeReactSubview:(UIView<RCTComponent>*) subview {
-     if ([subview isKindOfClass:[MappableMarkerView class]] && placemarks.count!=0) {
+    if ([subview isKindOfClass:[MappableMarkerView class]] && placemarks.count!=0) {
         MappableMarkerView* marker = (MappableMarkerView*) subview;
         [clusterCollection removeWithMapObject:[marker getMapObject]];
         [placemarks removeObjectIdenticalTo:[marker getMapObject]];
@@ -175,10 +198,10 @@
     CGContextSetFillColorWithColor(context, [UIColor.whiteColor CGColor]);
     CGContextFillEllipseInRect(context, CGRectMake(STROKE_SIZE, STROKE_SIZE, internalRadius*2, internalRadius*2));
     [text drawInRect:CGRectMake(externalRadius - size.width/2, externalRadius - size.height/2, size.width, size.height) withAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.blackColor }];
-       UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-       UIGraphicsEndImageContext();
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 
-       return newImage;
+    return newImage;
 }
 
 - (void)onClusterAddedWithCluster:(nonnull MMKCluster *)cluster {

@@ -77,6 +77,18 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             if (placemark != null) {
                 child.setMarkerMapObject(placemark)
             }
+        } else if (child is MappablePolygon) {
+            val _child = child
+            val obj = mapWindow.map.mapObjects.addPolygon(_child.polygon)
+            _child.setPolygonMapObject(obj)
+        } else if (child is MappablePolyline) {
+            val _child = child
+            val obj = mapWindow.map.mapObjects.addPolyline(_child.polyline)
+            _child.setPolylineMapObject(obj)
+        } else if (child is MappableCircle) {
+            val _child = child
+            val obj = mapWindow.map.mapObjects.addCircle(_child.circle)
+            _child.setCircleMapObject(obj)
         }
     }
 
@@ -87,6 +99,8 @@ class ClusteredMappableView(context: Context?) : MappableView(context), ClusterL
             if (mapObject == null || !mapObject.isValid) return
             clusterCollection.remove(mapObject)
             placemarksMap.remove("" + child.getPoint()!!.latitude + child.getPoint()!!.longitude)
+        } else {
+           super.removeChild(index)
         }
     }
 

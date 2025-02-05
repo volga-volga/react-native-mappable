@@ -159,14 +159,16 @@ var ClusteredMappable = /** @class */ (function (_super) {
         return img ? (0, resolveAssetSource_1.default)(img).uri : '';
     };
     ClusteredMappable.prototype.getProps = function () {
-        var props = __assign(__assign({}, this.props), { clusteredMarkers: this.props.clusteredMarkers.map(function (mark) { return mark.point; }), children: this.props.clusteredMarkers.map(this.props.renderMarker), onRouteFound: this.processRoute, onCameraPositionReceived: this.processCameraPosition, onVisibleRegionReceived: this.processVisibleRegion, onWorldToScreenPointsReceived: this.processWorldToScreenPointsReceived, onScreenToWorldPointsReceived: this.processScreenToWorldPointsReceived, userLocationIcon: this.props.userLocationIcon ? this.resolveImageUri(this.props.userLocationIcon) : undefined });
+        var props = __assign(__assign({}, this.props), { clusteredMarkers: this.props.clusteredMarkers.map(function (mark) { return mark.point; }), children: undefined, onRouteFound: this.processRoute, onCameraPositionReceived: this.processCameraPosition, onVisibleRegionReceived: this.processVisibleRegion, onWorldToScreenPointsReceived: this.processWorldToScreenPointsReceived, onScreenToWorldPointsReceived: this.processScreenToWorldPointsReceived, userLocationIcon: this.props.userLocationIcon ? this.resolveImageUri(this.props.userLocationIcon) : undefined });
         (0, utils_1.processColorProps)(props, 'clusterColor');
         (0, utils_1.processColorProps)(props, 'userLocationAccuracyFillColor');
         (0, utils_1.processColorProps)(props, 'userLocationAccuracyStrokeColor');
         return props;
     };
     ClusteredMappable.prototype.render = function () {
-        return (react_1.default.createElement(MappableMapNativeComponent, __assign({}, this.getProps(), { ref: this.map })));
+        return (react_1.default.createElement(MappableMapNativeComponent, __assign({}, this.getProps(), { ref: this.map }),
+            this.props.clusteredMarkers.map(this.props.renderMarker),
+            this.props.children));
     };
     ClusteredMappable.defaultProps = {
         showUserPosition: true,

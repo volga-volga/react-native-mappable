@@ -248,7 +248,7 @@ export class ClusteredMappable extends React.Component<ClusteredMappableMapProps
     const props = {
       ...this.props,
       clusteredMarkers: this.props.clusteredMarkers.map(mark => mark.point),
-      children: this.props.clusteredMarkers.map(this.props.renderMarker),
+      children: undefined,
       onRouteFound: this.processRoute,
       onCameraPositionReceived: this.processCameraPosition,
       onVisibleRegionReceived: this.processVisibleRegion,
@@ -268,7 +268,10 @@ export class ClusteredMappable extends React.Component<ClusteredMappableMapProps
       <MappableMapNativeComponent
         {...this.getProps()}
         ref={this.map}
-      />
+      >
+        {this.props.clusteredMarkers.map(this.props.renderMarker)}
+        {this.props.children}
+      </MappableMapNativeComponent>
     );
   }
 }
